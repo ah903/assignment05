@@ -1,9 +1,13 @@
-var express = require('express');
+// Required Dependencies 
+var express = require("express");
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+// API GET home page
+router.get("/", function(req, res, next) {
+
+	console.log("Received GET Root Request");
+	res.render("index", { title: "Express" });
+
 });
 
 module.exports = router;

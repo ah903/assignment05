@@ -4,11 +4,14 @@ var express = require("express");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var favicon = require("serve-favicon");
+var mongoose = require("mongoose");
 var logger = require("morgan");
 var path = require("path");
 
 // Required Custom Middleware supporting the application
 var routes = require("./routes/index");
+var products = require("./routes/products");
+var reviews = require("./routes/reviews");
 var users = require("./routes/users");
 
 // Start the server
@@ -40,8 +43,14 @@ app.use(cookieParser());
 // Statuc Content Server Targetting the Pulic Folder
 app.use(express.static(path.join(__dirname, "public")));
 
+// Connect to the database
+mongoose.connect("mongodb://localhost:27017/attire-db0-dev");
+
 // Applicatopn Specific Middleware Handled in Separate Modules
+// Uses different mount points for each application middleware
 app.use("/", routes);
+app.use("/products", products);
+app.use("/reviews", reviews);
 app.use("/users", users);
 
 

@@ -1,0 +1,28 @@
+{
+	title: "Slim Fit Jeans",
+	description:"Mens slim fit Levi 520 Jeans",
+	category:"Trousers",
+	group:"Menswear",
+	price:28.95,
+	stock:16,
+	promotion:"Reduced",
+	colors:["Dark Blue","Stonewash","White","Black"],
+	sizes:["W28","W30","W32","W34","W36","W38","W40"]
+}
+
+[
+	{
+		product: "55eb53a07196ae6167436908",
+		reviewer:"Anthony Harris",
+		title:"Excellent Value",
+		body:"Good product, exactly as described and fitted perfectly",
+		rating:4
+	},
+	{
+		product: "55eb53a07196ae6167436908",
+		reviewer:"Simon Jones",
+		title:"Good fit, fast delivery",
+		body:"Would recommend to anyone wanting Levi Jeans. Good value for money",
+		rating:5
+	}
+]
