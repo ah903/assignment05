@@ -6,8 +6,10 @@ var mongoose = require("mongoose");
 // By convention Mongoose applies the pluarl form of a noun so Product
 // maps to the Products collection. Here we make this explicit
 var productSchema = new mongoose.Schema({
+	productId	: {type : String, required  : true, index: true },		// Product Catalog Id
 	title 		: {type : String, required  : true, index: true },		// Product Title
 	description : {type : String, required  : true},					// Product Description
+	brand		: {type : String, index: true},							// Product Brand
 	category 	: {type : String, required  : true, index: true },		// Product Category e.g. Swinwear	
 	group 		: {type : String, required  : true, index: true },		// Product Group e.g. Menswear
 	campaign 	: {type : String, required  : false},					// Product Marketing Campaign

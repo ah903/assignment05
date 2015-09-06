@@ -1,25 +1,69 @@
-{
-	title: "Slim Fit Jeans",
-	description:"Mens slim fit Levi 520 Jeans",
-	category:"Trousers",
-	group:"Menswear",
-	price:28.95,
-	stock:16,
-	promotion:"Reduced",
-	colors:["Dark Blue","Stonewash","White","Black"],
-	sizes:["W28","W30","W32","W34","W36","W38","W40"]
-}
+[
+	{
+		productId: "00000001",
+		title: "Slim Fit Jeans",
+		description:"Mens slim fit Levi 520 Jeans",
+		brand:"Levi",
+		category:"Trousers",
+		group:"Menswear",
+		price:28.95,
+		stock:16,
+		promotion:"Reduced",
+		colors:["Dark Blue","Stonewash","White","Black"],
+		sizes:["W28","W30","W32","W34","W36","W38","W40"]
+	},
+
+	{
+		productId: "00000002",
+		title: "Regular Fit Jeans",
+		description:"Mens regular fit Levi 527 Jeans",
+		brand:"Levi",
+		category:"Trousers",
+		group:"Menswear",
+		price:30.95,
+		stock:12,
+		colors:["Dark Blue","Stonewash","Faded", "White","Black"],
+		sizes:["W28","W30","W32","W34","W36","W38","W40"]
+	},
+
+	{
+		productId: "00000003",
+		title: "Regular Fit Jeans",
+		description:"Mens regular shorts 530 Jeans",
+		brand:"Deisel",
+		category:"Trousers",
+		group:"Menswear",
+		price:42.00,
+		stock:4,
+		colors:["Dark Blue","Stonewash","Faded", "White"],
+		sizes:["W28","W30","W32","W34","W36","W38"]
+	},
+
+	{
+		productId: "00000004",
+		title: "Long Sleved Shirt",
+		description:"Mens slim fit Long Sleve Shirt",
+		brand:"Deisel",
+		category:"Shirts",
+		group:"Menswear",
+		price:35.00,
+		stock:44,
+		promotion:"New",
+		colors:["White","Light Blue","Green Check", "Yellow Check"],
+		sizes:["13.0","13.5","14.0","14.5","15.0","15.5","16.0","16.5","17.0"]
+	}
+]
 
 [
 	{
-		product: "55eb53a07196ae6167436908",
+		product: "00000001",
 		reviewer:"Anthony Harris",
 		title:"Excellent Value",
 		body:"Good product, exactly as described and fitted perfectly",
 		rating:4
 	},
 	{
-		product: "55eb53a07196ae6167436908",
+		product: "00000001",
 		reviewer:"Simon Jones",
 		title:"Good fit, fast delivery",
 		body:"Would recommend to anyone wanting Levi Jeans. Good value for money",
