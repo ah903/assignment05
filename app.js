@@ -11,6 +11,7 @@ var path = require("path");
 // Required Custom Middleware supporting the application
 var routes = require("./routes/index");
 var products = require("./routes/products");
+var search = require("./routes/search");
 var reviews = require("./routes/reviews");
 var users = require("./routes/users");
 
@@ -46,13 +47,27 @@ app.use(express.static(path.join(__dirname, "public")));
 // Connect to the database
 mongoose.connect("mongodb://localhost:27017/attire-db0-dev");
 
-// Applicatopn Specific Middleware Handled in Separate Modules
+
+// Application Specific Middleware Handled in Separate Modules
 // Uses different mount points for each application middleware
 app.use("/", routes);
 app.use("/products", products);
+app.use("/search", search);
 app.use("/reviews", reviews);
 app.use("/users", users);
 
+app.param("/search/Menswear", function(req, res, next, value) {
+    console.log("Group " + group);
+    req.query.group = group;
+    next();
+});
+
+app.param("/search/Trousers", function(req, res, next, category) {
+
+    console.log("Category " + category);
+    req.query.category = category;
+    next();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

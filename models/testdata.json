@@ -52,6 +52,20 @@
 		colors:["White","Light Blue","Green Check", "Yellow Check"],
 		sizes:["13.0","13.5","14.0","14.5","15.0","15.5","16.0","16.5","17.0"]
 	}
+
+	{
+		productId: "000000100",
+		title: "Long Sleved Blouse",
+		description:"Womens slim fit Long Sleve blouse",
+		brand:"Attire",
+		category:"Shirts",
+		group:"Womenswear",
+		price:25.00,
+		stock:20,
+		promotion:"New",
+		colors:["Cream","Light Blue","Light Green", "Pink", "Rose"],
+		sizes:["10","12","14","16","18","15.5"]
+	}
 ]
 
 [
