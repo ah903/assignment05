@@ -11,6 +11,7 @@ var path = require("path");
 // Required Custom Middleware supporting the application
 var routes = require("./routes/index");
 var products = require("./routes/products");
+var customers = require("./routes/customers");
 var users = require("./routes/users");
 
 // Start the server
