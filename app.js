@@ -45,6 +45,21 @@ app.use(express.static(path.join(__dirname, "public")));
 // Connect to the database
 mongoose.connect("mongodb://localhost:27017/attire-db0-dev");
 
+// Alternative Means of Handling group filter globally
+// See Products GET/products implementation
+//app.param("group", function(){
+//  console.log("Hit Group App Level Parameter");
+//  req.query.group = req.params.group;
+//  next();
+//});
+
+// Alternative Means of Handling category filter globally
+//app.param("category", function(){
+//  console.log("Hit Category App Level Parameter");
+//  req.query.category = req.params.catageory;
+//  next();
+//});
+
 
 // Application Specific Middleware Handled in Separate Modules
 // Uses different mount points for each application middleware

@@ -32,15 +32,18 @@ router.get("/", function(req, res, next) {
 
  	/////////////////////////////////////////////////////////////////
  	// Create a Search Query
-  	// Note this could potentially done in the pipeline
+  	// Note this could potentially done in the pipeline with app
+  	// params if we need to achieve reusable support for these
+  	// filters
   	/////////////////////////////////////////////////////////////////
   	var query={};
   	if(req.query.group) query.group=req.query.group;
   	if(req.query.category) query.category=req.query.category;  
-
+  	
   	// Execute the database query and return a 200 if successful
   	productModel.find(query,function(err,data){
   		if(err) next(err);
+  		if(!data) next();
 		res.status(200).json(data);
   	});
 });
@@ -61,6 +64,7 @@ router.get("/:productId", function(req, res, next) {
   	/////////////////////////////////////////////////////////////////
   	productModel.find({productId:req.params.productId},function(err,data){
   		if(err) next(err);
+  		if(!data) next();
 		res.status(200).json(data);
   	});
 });
@@ -90,6 +94,7 @@ router.get("/:productId/reviews", function(req, res, next) {
   	/////////////////////////////////////////////////////////////////
   	reviewModel.find(query).sort({posted:1}).exec(function(err, data){
   		if(err) next(err);
+  		if(!data) next();
   		res.status(200).json(data);		
   	});
 });
@@ -118,7 +123,8 @@ router.get("/:productId/reviews/:reviewId", function(req, res, next) {
   	// Execute the database query and return a 200 if successful
   	/////////////////////////////////////////////////////////////////
   	reviewModel.find(query).sort({posted:1}).exec(function(err, data){
-  		if(err) next(err);
+  		if(err) next(err); 
+  		if(!data) next();
   		res.status(200).json(data);		
   	});
 });
@@ -148,10 +154,33 @@ router.post("/:productId/reviews", function(req, res, next) {
 	/////////////////////////////////////////////////////////////////
 	newReview.save(function(err, data){
 		if(err) next(err);
+		if(!data) next();
 		res.status(201).json(data);				
 	});
 
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// API : DELETE /products/123456789/reviews/5d334ea33bb31cff
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Description
+// Deletes a review for a specific product identified by the object id 
+// Sends Back HTTP 204 Indicated Resource Deleted Successfully.
+// Does not return any resource if deleted successfully
+/////////////////////////////////////////////////////////////////////////////////////////////////
+router.delete("/:productId/reviews/:reviewId", function(req, res, next) {
+
+  	console.log("Received DELETE Request Review Id " + req.params.reviewId);
+  	var query = {};
+  	query._id=req.params.reviewId;
+
+  	/////////////////////////////////////////////////////////////////
+	// Delete the Review and Return 204 Code If Successful
+	/////////////////////////////////////////////////////////////////
+  	reviewModel.remove(query,function(err, data){
+  		if(err) next(err);
+		res.status(204).send();	
+  	});
+});
 
 module.exports = router;
