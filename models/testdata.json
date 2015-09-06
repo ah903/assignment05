@@ -54,7 +54,7 @@
 	}
 
 	{
-		productId: "000000100",
+		productId: "10000000",
 		title: "Long Sleved Blouse",
 		description:"Womens slim fit Long Sleve blouse",
 		brand:"Attire",
@@ -70,14 +70,14 @@
 
 [
 	{
-		product: "00000001",
+		productId: "00000001",
 		reviewer:"Anthony Harris",
 		title:"Excellent Value",
 		body:"Good product, exactly as described and fitted perfectly",
 		rating:4
 	},
 	{
-		product: "00000001",
+		productId: "00000001",
 		reviewer:"Simon Jones",
 		title:"Good fit, fast delivery",
 		body:"Would recommend to anyone wanting Levi Jeans. Good value for money",

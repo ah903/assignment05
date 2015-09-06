@@ -12,7 +12,8 @@ var mongoose = require("mongoose");
 // important as reviews will be created after the prodict document is created
 // Insert is somewhat simpler than document update 
 var reviewSchema = new mongoose.Schema({
-	product		: {type : mongoose.Schema.ObjectId, ref:"Product", index: true}, 		// Review for Product
+	//productId	: {type : mongoose.Schema.ObjectId, ref:"Product", index: true}, 	// Review for Product
+	productId	: {type : String, ref:"Product", index: true},
 	reviewer	: {type : String, required : true},									// Reviewer Name
 	title 		: {type : String, required : true},									// Review Title
 	body 		: {type : String, required : true},									// Review Text
