@@ -31,7 +31,6 @@
 		name:"Gerry Kehoe",
 		address:{
 			streetname 	: "101 Arcacia Avenue", 
-			town 		: "Wapping",
 			city		: "London",
 			postcode 	: "E1W 1WW"
 		},
@@ -47,7 +46,6 @@
 		name:"Donna Kehoe",
 		address:{
 			streetname 	: "101 Arcacia Avenue", 
-			town 		: "Wapping",
 			city		: "London",
 			postcode 	: "E1W 1WW"
 		},
@@ -60,3 +58,9 @@
 	}
 ]
 
+
+	{
+		username:"thomas.hall@gmail.com",name:"Thomas Hall",
+		address:{streetname:"101 Arcacia Avenue",town:"Wapping",city:"London",postcode: "E1W 1WW"},
+		card:{cardtype:"Visa",cardnumber:"xxxx-xxxx-xxxx-xxxx",expirydate:"February 1 2016",cvcode:"245" }
+	}

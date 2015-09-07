@@ -26,26 +26,32 @@ var reviewModel = require("../models/reviewModel");
 /////////////////////////////////////////////////////////////////////////////////////////////////
 router.get("/", function(req, res, next) {
 
-  	console.log("Received GET Request All Products");
- 	console.log("Group " + req.query.group);
- 	console.log("Category " + req.query.category);
+    console.log("Received GET Request All Products");
+ 	  console.log("Group " + req.query.group);
+ 	  console.log("Category " + req.query.category);
 
- 	/////////////////////////////////////////////////////////////////
- 	// Create a Search Query
+ 	  /////////////////////////////////////////////////////////////////
+ 	  // Create a Search Query
   	// Note this could potentially done in the pipeline with app
   	// params if we need to achieve reusable support for these
   	// filters
-  	/////////////////////////////////////////////////////////////////
-  	var query={};
+  	////////////////////////////////////////////////////////////////
+    var options=req.pagingOptions;
+  	var query={}; 
   	if(req.query.group) query.group=req.query.group;
-  	if(req.query.category) query.category=req.query.category;  
-  	
-  	// Execute the database query and return a 200 if successful
-  	productModel.find(query,function(err,data){
-  		if(err) next(err);
-  		if(!data) next();
-		res.status(200).json(data);
-  	});
+  	if(req.query.category) query.category=req.query.category; 
+  	productModel.find(query).limit(options.size).skip(options.skip).exec(function(err, data){
+        if(err) next(err);
+        if(!data) next();
+        res.status(200).json(data);
+    });
+
+    // Execute the database query and return a 200 if successful
+  	//productModel.find(query,options,function(err,data){
+  	//	if(err) next(err);
+  	//	if(!data) next();
+		//res.status(200).json(data);
+  	//});
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,7 +90,8 @@ router.get("/:productId/reviews", function(req, res, next) {
   	/////////////////////////////////////////////////////////////////
   	// Create Query and Sort Options For The Database Filter
   	/////////////////////////////////////////////////////////////////
-  	var query={}, sortOptions={};
+  	var options=req.pagingOptions;
+    var query={}, sortOptions={};
 
   	query.productId = req.params.productId;
   	sortOptions.sort={posted:1};
@@ -92,7 +99,7 @@ router.get("/:productId/reviews", function(req, res, next) {
   	/////////////////////////////////////////////////////////////////
   	// Execute the database query and return a 200 if successful
   	/////////////////////////////////////////////////////////////////
-  	reviewModel.find(query).sort({posted:1}).exec(function(err, data){
+  	reviewModel.find(query).limit(options.size).skip(options.skip).sort({posted:1}).exec(function(err, data){
   		if(err) next(err);
   		if(!data) next();
   		res.status(200).json(data);		

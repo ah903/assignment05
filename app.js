@@ -46,27 +46,26 @@ app.use(express.static(path.join(__dirname, "public")));
 // Connect to the database
 mongoose.connect("mongodb://localhost:27017/attire-db0-dev");
 
-// Alternative Means of Handling group filter globally
-// See Products GET/products implementation
-//app.param("group", function(){
-//  console.log("Hit Group App Level Parameter");
-//  req.query.group = req.params.group;
-//  next();
-//});
+// Global Middleware to handle requests for pagination. Extracts
+// Pagination data from the query string and stores it in the 
+app.use("/api/", function(req,res,next){
+    var pagingOptions = {size:20, page:0, skip:0};
+    if(req.query.page) pagingOptions.page = parseInt(req.query.page);
+    if(req.query.size) pagingOptions.size = parseInt(req.query.size);
+    
+    if(pagingOptions.size && pagingOptions.page)
+      pagingOptions.skip = (pagingOptions.page > 1) ? (pagingOptions.page-1) * pagingOptions.size: 0;
 
-// Alternative Means of Handling category filter globally
-//app.param("category", function(){
-//  console.log("Hit Category App Level Parameter");
-//  req.query.category = req.params.catageory;
-//  next();
-//});
-
+    req.pagingOptions = pagingOptions;
+    next();
+})
 
 // Application Specific Middleware Handled in Separate Modules
 // Uses different mount points for each application middleware
-app.use("/", routes);
-app.use("/products", products);
-app.use("/users", users);
+app.use("/api/", routes);
+app.use("/api/products", products);
+app.use("/api/customers", customers);
+app.use("/api/users", users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

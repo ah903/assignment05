@@ -67,20 +67,3 @@
 		sizes:["10","12","14","16","18","15.5"]
 	}
 ]
-
-[
-	{
-		productId: "00000001",
-		reviewer:"Anthony Harris",
-		title:"Excellent Value",
-		body:"Good product, exactly as described and fitted perfectly",
-		rating:4
-	},
-	{
-		productId: "00000001",
-		reviewer:"Simon Jones",
-		title:"Good fit, fast delivery",
-		body:"Would recommend to anyone wanting Levi Jeans. Good value for money",
-		rating:5
-	}
-]
