@@ -20,6 +20,7 @@ var app = express();
 // view engine setup using Jade Template Engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
+//app.configure('development', function () { app.locals.pretty = true; });
 
 // Routing Middleware for all received Requests. Typically adds data
 // To The Request Object Creating a pipeline of activity that is
@@ -62,7 +63,7 @@ app.use("/api/", function(req,res,next){
 
 // Application Specific Middleware Handled in Separate Modules
 // Uses different mount points for each application middleware
-app.use("/api/", routes);
+app.use("/", routes);
 app.use("/api/products", products);
 app.use("/api/customers", customers);
 app.use("/api/users", users);
