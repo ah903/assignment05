@@ -1,0 +1,50 @@
+http://beta.json-generator.com/
+[
+  {
+    'repeat:400': {
+      _id: {oid: '{{objectId()}}'},
+      productId: '{{index()}}',
+      title:'{{lorem(8, "words")}}',
+      description:'{{lorem(1, "paragraphs")}}',
+      brand:'{{random("Attire", "Levi", "Deisel", "Nike", "DKNY", "Farhi","Ralph Lauren", "Calvin Klein", "Adidas" )}}',
+      group:'{{random("Mens", "Womens", "Boys", "Girls")}}',
+      category: function(){
+      	var m_items=["Trousers", "Shirts", "Shoes", "Suits", "Underwear", "Casual", "Coats", "Outdoors", "Beachwear", "Accessories"];
+      	var f_items=["Trousers", "Shoes", "Suits", "Skirts","Dresses", "Casual", "Underwear", "Coats", "Outdoors", "Beachwear", "Jewellry", "Accessories"];
+      	if(this.group=="Mens" || "Boys"){
+      		var rnd = Math.floor(Math.random() * m_items.length);
+      		return m_items[rnd];
+      	}
+      	else{
+      		var rnd = Math.floor(Math.random() * f_items.length);
+      		return f_items[rnd];
+      	}
+      },
+      price:'{{floating(25.50, 399.00, 2, "$0,0.00")}}',
+      stock: '{{integer(1, 100)}}',
+      promotion:'{{random("", "Save 10%", "Save 20%", "2 for 1")}}',
+      colors:["Black", "White", "Cream", "Green", "Blue", "Navy", "Charcol", "Red" ,"Cerise", "Pink"],
+      sizes: function () {
+        if(this.category==="Shoes")
+        	return ["32","33","34","35","36","37","38","39","40","41","42","42","44","46","47","48"];
+        else
+        	return ["XS", "S", "M", "L", "XL", "XXL"];
+      },
+      pictures:[
+        {
+          'repeat:6': {
+            large  : "http://placehold.it/800x400?text=Main Image",
+            medium : "http://placehold.it/600x300?text=Main Image",
+            small  : "http://placehold.it/400x200?text=Main Image",
+            thumb  : "http://placehold.it/100x100",
+            front  : "http://placehold.it/200x200?text=Front",
+            back   : "http://placehold.it/200x200?text=Back",
+            model1 : "http://placehold.it/200x200?text=Model",
+            model2 : "http://placehold.it/200x200?text=Model"
+          }
+        }
+      ]
+      
+    }
+  }
+]

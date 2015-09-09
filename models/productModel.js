@@ -27,7 +27,17 @@ var productSchema = new mongoose.Schema({
 	promotion 	: {type : String, required  : true, index: true },		// Promotion Description
 	colors		: {type : Array , default : []},						// Product Available Colors
 	sizes		: {type : Array , default : []},						// Product Available Sizes
-	pictures	: {type : Array , default : []},						// Product Imagery
+	pictures	: 
+	{
+		large	: {type : String},										// Product Imagery
+		medium	: {type : String},										// Product Imagery
+		small	: {type : String},										// Product Imagery
+		thumb	: {type : String},										// Product Imagery
+		front	: {type : String},										// Product Imagery
+		back	: {type : String},										// Product Imagery
+		model1	: {type : String},										// Product Imagery
+		model2	: {type : String}										// Product Imagery
+	},						
 	related		: {type : Array , default : []},						// Related Products
 
 }, {collection:"products"});

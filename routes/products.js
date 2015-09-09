@@ -116,23 +116,22 @@ router.get("/:productId/reviews/:reviewId", function(req, res, next) {
 
   	console.log("Received GET Request Review with Review Id for Product Id " + req.params.productId);
 
-  	/////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
   	// Create Query and Sort Options For The Database Filter
   	/////////////////////////////////////////////////////////////////
-  	var query={}, sortOptions={};
+  	var query={};
 
   	query.productId = req.params.productId;
   	query._id = req.params.reviewId;
   	console.log(query);
-  	sortOptions.sort={posted:1};
-
+  
   	/////////////////////////////////////////////////////////////////
   	// Execute the database query and return a 200 if successful
   	/////////////////////////////////////////////////////////////////
-  	reviewModel.find(query).sort({posted:1}).exec(function(err, data){
-  		if(err) next(err); 
-  		if(!data) next();
-  		res.status(200).json(data);		
+  	reviewModel.findById(req.params.reviewId, function(err, data){
+        if(err) next(err); 
+  	    if(!data) next();
+  		  res.status(200).json(data);		
   	});
 });
 

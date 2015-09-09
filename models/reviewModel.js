@@ -22,13 +22,21 @@ var mongoose = require("mongoose");
 // Insert is somewhat simpler than document update 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 var reviewSchema = new mongoose.Schema({
-	//productId	: {type : mongoose.Schema.ObjectId, ref:"Product", index: true}, 	// Review for Product
+
 	productId	: {type : String, ref:"Product", index: true},
-	reviewer	: {type : String, required : true},									// Reviewer Name
-	title 		: {type : String, required : true},									// Review Title
-	body 		: {type : String, required : true},									// Review Text
-	posted 		: {type : String, default  : Date.now},								// Date Posted	
-	rating 		: {type : Number, required : true, min : 1, max : 5, index: true }	// Rating
+	reviewer	: {type : String},									// Reviewer Name
+	title 		: {type : String},									// Review Title
+	body 		: {type : String},									// Review Text
+	posted 		: {type : String, default  : Date.now, index:true},					// Date Posted	
+	rating 		: {type : Number, min : 1, max : 5, index: true }	// Rating
+
+	////productId	: {type : mongoose.Schema.ObjectId, ref:"Product", index: true}, 	// Review for Product
+	//productId	: {type : String, ref:"Product", index: true},
+	//reviewer	: {type : String, required : true},									// Reviewer Name
+	//title 		: {type : String, required : true},									// Review Title
+	//body 		: {type : String, required : true},									// Review Text
+	//posted 		: {type : String, default  : Date.now, index:true},					// Date Posted	
+	//rating 		: {type : Number, required : true, min : 1, max : 5, index: true }	// Rating
 
 }, {collection:"reviews"});
 
