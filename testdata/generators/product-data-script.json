@@ -1,9 +1,9 @@
 http://beta.json-generator.com/
-[
+[  
   {
-    'repeat:400': {
+    'repeat:100': {
       _id: {oid: '{{objectId()}}'},
-      productId: '{{index()}}',
+      productId: 'A0000{{index()}}',
       title:'{{lorem(8, "words")}}',
       description:'{{lorem(1, "paragraphs")}}',
       brand:'{{random("Attire", "Levi", "Deisel", "Nike", "DKNY", "Farhi","Ralph Lauren", "Calvin Klein", "Adidas" )}}',
@@ -30,9 +30,8 @@ http://beta.json-generator.com/
         else
         	return ["XS", "S", "M", "L", "XL", "XXL"];
       },
-      pictures:[
+      pictures:
         {
-          'repeat:6': {
             large  : "http://placehold.it/800x400?text=Main Image",
             medium : "http://placehold.it/600x300?text=Main Image",
             small  : "http://placehold.it/400x200?text=Main Image",
@@ -41,10 +40,8 @@ http://beta.json-generator.com/
             back   : "http://placehold.it/200x200?text=Back",
             model1 : "http://placehold.it/200x200?text=Model",
             model2 : "http://placehold.it/200x200?text=Model"
-          }
         }
-      ]
-      
+    
     }
   }
 ]
