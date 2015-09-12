@@ -1,0 +1,53 @@
+extends layout
+include mixins
+
+block content
+  +navbar("Attire","/#/home",main-menu)
+    +navbar_dropdown("#")(label="Women")
+      +navbar_item("#") Suits
+      +navbar_item("#") Blouses
+      +navbar_item("#") Skirts
+      +navbar_item_divider
+      +navbar_item("#") Shoes
+      +navbar_item_divider
+      +navbar_item("#") Outdoors
+      +navbar_item("#") Underwear
+      +navbar_item("#") Accessories
+      +navbar_item_divider
+      +navbar_item("#") Sale
+    +navbar_dropdown("#")(label="Men")
+      +navbar_item("#") Suits
+      +navbar_item("#") Shirts
+      +navbar_item("#") Trousers
+      +navbar_item_divider
+      +navbar_item("#") Shoes
+      +navbar_item_divider
+      +navbar_item("#") Outdoors
+      +navbar_item("#") Underwear
+      +navbar_item("#") Accessories
+      +navbar_item_divider
+      +navbar_item("#") Sale
+    +navbar_dropdown("#")(label="Girls")
+      +navbar_item("#") School
+      +navbar_item_divider
+      +navbar_item("#") Shoes
+      +navbar_item_divider
+      +navbar_item("#") Outdoors
+      +navbar_item("#") Underwear
+      +navbar_item("#") Accessories
+      +navbar_item_divider
+      +navbar_item("#") Sale
+    +navbar_dropdown("#")(label="Boys")
+      +navbar_item("#") Shirts
+      +navbar_item("#") Trousers
+      +navbar_item_divider
+      +navbar_item("#") Shoes
+      +navbar_item_divider
+      +navbar_item("#") Outdoors
+      +navbar_item("#") Underwear
+      +navbar_item("#") Accessories
+      +navbar_item_divider
+      +navbar_item("#") Sale
+    +navbar_item("/#/basket") Basket
+    +navbar_item("/#/login") Login
+  div(ng-view)   

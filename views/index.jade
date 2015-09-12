@@ -1,7 +1,25 @@
 extends layout
 
 block content
-  div(ng-controller="main-controller")
-    input(type="text" placeholder="Name" ng-model="name" title="Enter your name")
-    p {{name}}
+  ul
+    li
+      a(href='/#/home') Home
+    li
+      a(href='/#/products') Men 
+    li
+      a(href='/#/products') Women
+    li
+      a(href='/#/products') Boys 
+    li
+      a(href='/#/products') Girls
+    li
+      a(href='/#/basket') Basket
+    li
+      a(href='/#/login') Login
+    li
+      a(href='/#/register') Register
+
+  div(ng-view)
+
+
 
