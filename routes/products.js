@@ -66,12 +66,28 @@ router.get("/:productId", function(req, res, next) {
   	console.log("Received GET Request Products By Id " + req.params.productId);
   	
   	/////////////////////////////////////////////////////////////////
-  	// Execute the database query and return a 200 if successful
+  	// Execute the database query and get the requested product
+    // If a product has related products load those as well based
+    // on productId rather than Objectid. This is mostly due to
+    // how test data was generated. May be able top use the populate
+    // method with a productId path as an alternative implementation 
   	/////////////////////////////////////////////////////////////////
-  	productModel.find({productId:req.params.productId},function(err,data){
-  		if(err) next(err);
-  		if(!data) next();
-		res.status(200).json(data);
+  	productModel.findOne({productId:req.params.productId},function(err,data){      
+      if(err) next(err); if(!data) next();
+      if(data.related.length > 0) {
+        console.log("Loading Related Data");
+        productModel.find({productId:{$in:data.related}}).exec(function(err,related){
+          data.related=related;
+          res.status(200).json(data);
+        })
+      }
+      else{
+        console.log("Running Suggestions for " + data.brand + " and " + data.group);
+        productModel.find({brand:data.brand,group:data.group}).limit(4).exec(function(err,suggested){
+          data.related=suggested;
+          res.status(200).json(data);
+        }) 
+      }
   	});
 });
 

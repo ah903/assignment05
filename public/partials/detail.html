@@ -34,12 +34,13 @@
 				</select>	
 			</div>
 			<div class="row">
-				<span>&nbsp;</span>
+				<p></p>
 				<button ng-click="AddToBasket(CurrentProduct)" class="btn btn-default pull-right">Add To Basket
 				</button>
 			</div>
 		</div>
 	</div>
+	<hr>
 	<div class="row">
 		<h3>Customer Reviews</h3>
 		<div class="container">
@@ -62,50 +63,24 @@
 			</div>
 		</div>
 	</div>
+	<hr>
 	<div class="row">
 		<h3>You might also like</h3>
 		<div class="container">
 			<div class="row">
-  				<div class="col-sm-6 col-md-3">
-    				<div class="thumbnail">
-      					<img src="http://placehold.it/250x250&text=Related" alt="Test">
+				<div class="col-sm-6 col-md-3" ng-Repeat="item in CurrentProduct.related">
+					<div class="thumbnail">
+      					<img ng-src="{{item.pictures.small}}" alt="{{item.title}}">
       					<div class="caption">
-        					<h4>Product<h4>
-        					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex ullam blanditiis possimus cupiditate, autem temporibus magni doloribus rerum aliquam repudiandae, recusandae voluptas similique a quaerat tempore et, dolore impedit in</p>	
-        					<p><a href="#" class="btn btn-default" role="button">View</a></p>
+      						<h4><strong>{{item.title}}</strong><h4>
+							{{item.description}}
+							<p></p><button class="btn btn-default">View</button>
       					</div>
-    				</div>
-  				</div><div class="col-sm-6 col-md-3">
-    				<div class="thumbnail">
-      					<img src="http://placehold.it/250x250&text=Related" alt="Test">
-      					<div class="caption">
-        					<h4>Product<h4>
-        					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex ullam blanditiis possimus cupiditate, autem temporibus magni doloribus rerum aliquam repudiandae, recusandae voluptas similique a quaerat tempore et, dolore impedit in</p>	
-        					<p><a href="#" class="btn btn-default" role="button">View</a></p>
-      					</div>
-    				</div>
-  				</div><div class="col-sm-6 col-md-3">
-    				<div class="thumbnail">
-      					<img src="http://placehold.it/250x250&text=Related" alt="Test">
-      					<div class="caption">
-        					<h4>Product<h4>
-        					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex ullam blanditiis possimus cupiditate, autem temporibus magni doloribus rerum aliquam repudiandae, recusandae voluptas similique a quaerat tempore et, dolore impedit in</p>	
-        					<p><a href="#" class="btn btn-default" role="button">View</a></p>
-      					</div>
-    				</div>
-  				</div>  		
-				<div class="col-sm-6 col-md-3">
-    				<div class="thumbnail">
-      					<img src="http://placehold.it/250x250&text=Related" alt="Test">
-      					<div class="caption">
-        					<h4>Product<h4>
-        					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex ullam blanditiis possimus cupiditate, autem temporibus magni doloribus rerum aliquam repudiandae, recusandae voluptas similique a quaerat tempore et, dolore impedit in</p>	
-        					<p><a href="#" class="btn btn-default" role="button">View</a></p>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-    	</div>
-    </div>
+      				</div>
+    			</div>
+  			</div>
+		</div>
+	</div>	
   </div>
 </div>
+

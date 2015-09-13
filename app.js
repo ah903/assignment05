@@ -20,7 +20,6 @@ var app = express();
 // view engine setup using Jade Template Engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
-//app.configure('development', function () { app.locals.pretty = true; });
 app.set('view options', { pretty: true });
 
 // Routing Middleware for all received Requests. Typically adds data
