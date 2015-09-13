@@ -23,6 +23,10 @@ app.config(["$routeProvider", function($routeProvider) {
         templateUrl: "partials/products.html",
         controller: "product-controller"
       }).
+      when("/detail", {
+        templateUrl: "partials/detail.html",
+        controller: "product-controller"
+      }).
       when("/checkout", {
         templateUrl: "partials/checkout.html",
         controller: "checkout-controller"
