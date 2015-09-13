@@ -38,7 +38,7 @@ var productSchema = new mongoose.Schema({
 		model1	: {type : String},										// Product Imagery
 		model2	: {type : String}										// Product Imagery
 	},						
-	related		: {type : Array , default : []},						// Related Products
+	related	: {type : Array , default : []}								// Related Products
 
 }, {collection:"products"});
 

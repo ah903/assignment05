@@ -22,7 +22,7 @@ http://beta.json-generator.com/
       },
       price:'{{floating(25.50, 399.00, 2, "$0,0.00")}}',
       stock: '{{integer(1, 100)}}',
-      promotion:'{{random("", "Save 10%", "Save 20%", "2 for 1")}}',
+      promotion:'{{random("", "Save 10%", "Save 20%", "New")}}',
       colors:["Black", "White", "Cream", "Green", "Blue", "Navy", "Charcol", "Red" ,"Cerise", "Pink"],
       sizes: function () {
         if(this.category==="Shoes")
@@ -40,6 +40,21 @@ http://beta.json-generator.com/
             back   : "http://placehold.it/400x400?text=Back",
             model1 : "http://placehold.it/400x400?text=Model",
             model2 : "http://placehold.it/400x400?text=Model"
+        },
+        related:function(){
+          
+          if(this.productId.length < 1) return; 
+          var allLines = ["A","B","C","D"];
+          var retLines=[];
+          var prefix = this.productId[0];
+          var suffix = this.productId.substring(1);  
+          for(var i =0; i < allLines.length; i++){
+            if(allLines[i]!==prefix){
+               retLines.push(allLines[i]+suffix); 
+            }
+          }
+          return retLines;
+
         }
     
     }

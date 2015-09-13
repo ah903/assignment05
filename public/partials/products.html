@@ -2,6 +2,7 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
+			<td>Reference</td>
 			<td>Category</td>
 			<td>Title</td>
 			<td>Price</td>
@@ -11,6 +12,7 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat = "product in products">
+			<td>{{product.productId}}</td>
 			<td>{{product.category}}</td>
 			<td>{{product.title}}</td>
 			<td>{{product.price}}</td>
