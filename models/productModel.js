@@ -22,7 +22,7 @@ var productSchema = new mongoose.Schema({
 	category 	: {type : String, required  : true, index: true },		// Product Category e.g. Swinwear	
 	group 		: {type : String, required  : true, index: true },		// Product Group e.g. Menswear
 	campaign 	: {type : String, required  : false},					// Product Marketing Campaign
-	price 		: {type : Number, required  : true},					// Product Price
+	price 		: {type : String, required  : true},					// Product Price
 	stock 		: {type : Number, required  : true},					// Units In Stock
 	promotion 	: {type : String, required  : true, index: true },		// Promotion Description
 	colors		: {type : Array , default : []},						// Product Available Colors
