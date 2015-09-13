@@ -5,9 +5,14 @@ angular.module("attire-app").factory("DataFactory",["$http", function($http){
 		return $http.get(serviceEndpoint);
 	};
 
-	return{
-		getProducts:getProducts
+	var getReviews = function(product){
+		var serviceEndpoint = "/api/products/" + product.productId + "/reviews";
+		return $http.get(serviceEndpoint);
+	};
 
+	return{
+		getProducts:getProducts,
+		getReviews:getReviews
 	};
 	
 }]);
