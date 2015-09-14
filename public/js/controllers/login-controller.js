@@ -8,9 +8,7 @@
 // Dependencies
 // $scope
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("LoginController", function($scope){
+angular.module("attire-app").controller("LoginController", ["$scope",function($scope){
     console.log("Login Controller");
     $scope.greeting="Welcome Andrew Login Controller";
-});
-
-LoginController.$inject = ["$scope"];
+}]);

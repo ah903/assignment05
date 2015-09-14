@@ -9,21 +9,14 @@
 // $scope, $routeParams, $location, $routeScope, ProductFactory
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-angular.module("attire-app").controller("ProductController", function($scope, $routeParams, $location, $rootScope, ProductFactory){
+angular.module("attire-app").controller("ProductController", ["$scope","$routeParams","ProductFactory",function($scope, $routeParams,ProductFactory){
 
+	///////////////////////////////////////////////////////////////////////////
+	// Initial View - Load Data When Controller Is Instantiated
+	///////////////////////////////////////////////////////////////////////////
 	var promise=ProductFactory.getProductsForGroupCategory($routeParams.group,$routeParams.category);
 	promise.success(function(response){
 		$scope.products=response;
 	});
 
-	$scope.GetProduct=function(product){
-		ProductFactory.getProductById(product.productId).then(function(response){
-			$scope.CurrentProduct=response;	
-			$rootScope.CurrentProduct=response;
-	    	$location.url("/detail");		
-		})
-	};
-
-});
-ProductController.$inject = ["$scope","$routeParams","$location","$rootScope","ProductFactory"];
-
+}]);

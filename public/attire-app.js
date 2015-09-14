@@ -35,9 +35,9 @@ angular.module("attire-app").config(["$routeProvider", function($routeProvider) 
         templateUrl: "partials/products.html",
         controller: "ProductController"
       }).
-      when("/detail", {
+      when("/product/:productId", {
         templateUrl: "partials/detail.html",
-        controller: "ProductController"
+        controller: "DetailController"
       }).
       when("/checkout", {
         templateUrl: "partials/checkout.html",

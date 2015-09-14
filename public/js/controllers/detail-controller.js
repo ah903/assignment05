@@ -1,14 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
-// Basket Controller
+// Detail Controller
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Manages the data that is presented to the view and provides interaction points
 // To Back end service functionality. Attached to attire-app module. Uses Minification
 // Safe Injection mechanism
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Dependencies
-// $scope
+// $scope, $routeParams, $location, $routeScope, ProductFactory
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("BasketController", ["$scope",function($scope){
-    console.log("Basket Controller");
-    $scope.greeting="Welcome Andrew Basket Controller";
+
+angular.module("attire-app").controller("DetailController", ["$scope","$routeParams","ProductFactory",function($scope,$routeParams,ProductFactory){
+
+	///////////////////////////////////////////////////////////////////////////
+	// Initial View - Load Data When Controller Is Instantiated
+	///////////////////////////////////////////////////////////////////////////
+	ProductFactory.getProductById($routeParams.productId).then(function(response){
+		$scope.CurrentProduct=response;	
+	})
+
 }]);

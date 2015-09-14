@@ -8,9 +8,8 @@
 // Dependencies
 // $scope
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("CheckoutController", function($scope){
+angular.module("attire-app").controller("CheckoutController", ["$scope",function($scope){
     console.log("Checkout Controller");
     $scope.greeting="Welcome Andrew Checkout Controller";
-});
+}]);
 
-CheckoutController.$inject = ["$scope"];
