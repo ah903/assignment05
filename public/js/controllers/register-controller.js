@@ -1,4 +1,16 @@
-angular.module("attire-app").controller("register-controller", function($scope){
+///////////////////////////////////////////////////////////////////////////////////////////
+// Product Controller
+///////////////////////////////////////////////////////////////////////////////////////////
+// Manages the data that is presented to the view and provides interaction points
+// To Back end service functionality. Attached to attire-app module. Uses Minification
+// Safe Injection mechanism
+///////////////////////////////////////////////////////////////////////////////////////////
+// Dependencies
+// $scope
+///////////////////////////////////////////////////////////////////////////////////////////
+angular.module("attire-app").controller("RegisterController", function($scope){
     console.log("Register Controller");
     $scope.greeting="Welcome Andrew Register Controller";
 });
+
+RegisterController.$inject = ["$scope"];

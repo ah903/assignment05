@@ -1,4 +1,16 @@
-angular.module("attire-app").controller("login-controller", function($scope){
+///////////////////////////////////////////////////////////////////////////////////////////
+// Login Controller
+///////////////////////////////////////////////////////////////////////////////////////////
+// Manages the data that is presented to the view and provides interaction points
+// To Back end service functionality. Attached to attire-app module. Uses Minification
+// Safe Injection mechanism
+///////////////////////////////////////////////////////////////////////////////////////////
+// Dependencies
+// $scope
+///////////////////////////////////////////////////////////////////////////////////////////
+angular.module("attire-app").controller("LoginController", function($scope){
     console.log("Login Controller");
     $scope.greeting="Welcome Andrew Login Controller";
 });
+
+LoginController.$inject = ["$scope"];

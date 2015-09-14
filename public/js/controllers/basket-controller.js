@@ -1,5 +1,16 @@
-
-angular.module("attire-app").controller("basket-controller", function($scope){
+///////////////////////////////////////////////////////////////////////////////////////////
+// Basket Controller
+///////////////////////////////////////////////////////////////////////////////////////////
+// Manages the data that is presented to the view and provides interaction points
+// To Back end service functionality. Attached to attire-app module. Uses Minification
+// Safe Injection mechanism
+///////////////////////////////////////////////////////////////////////////////////////////
+// Dependencies
+// $scope
+///////////////////////////////////////////////////////////////////////////////////////////
+angular.module("attire-app").controller("BasketController", function($scope){
     console.log("Basket Controller");
     $scope.greeting="Welcome Andrew Basket Controller";
 });
+
+BasketController.$inject = ["$scope"];

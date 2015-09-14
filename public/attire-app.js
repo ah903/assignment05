@@ -1,39 +1,50 @@
-var app = angular.module("attire-app", ["ngRoute"]);
+///////////////////////////////////////////////////////////////////////////////////////////
+// Angular Module Declaration For the application
+///////////////////////////////////////////////////////////////////////////////////////////
+// Dependencies
+// NgRoute to support client side navigational routing 
+///////////////////////////////////////////////////////////////////////////////////////////
+angular.module("attire-app", ["ngRoute"]);
 
-app.config(["$routeProvider", function($routeProvider) {
-    console.log("Client Side Routing");
+
+///////////////////////////////////////////////////////////////////////////////////////////
+// Client Side Routing Configuration of Route Provider
+// Identifies the controller and template for each route
+// Sets Home as the Unconfigured default Route
+///////////////////////////////////////////////////////////////////////////////////////////
+angular.module("attire-app").config(["$routeProvider", function($routeProvider) {
+
     $routeProvider.
       when("/home", {
         templateUrl: "partials/home.html",
-        controller: "home-controller"
+        controller: "HomeController"
       }).      
       when("/login", {
         templateUrl: "partials/login.html",
-        controller: "login-controller"
+        controller: "LoginController"
       }).
       when("/register", {
         templateUrl: "partials/register.html",
-        controller: "register-controller"
+        controller: "RegisterController"
       }).
       when("/basket", {
         templateUrl: "partials/basket.html",
-        controller: "basket-controller"
+        controller: "BasketController"
       }).
       when("/products/:group?/:category?", {
         templateUrl: "partials/products.html",
-        controller: "product-controller"
+        controller: "ProductController"
       }).
       when("/detail", {
         templateUrl: "partials/detail.html",
-        controller: "product-controller"
+        controller: "ProductController"
       }).
       when("/checkout", {
         templateUrl: "partials/checkout.html",
-        controller: "checkout-controller"
+        controller: "CheckoutController"
       }).
       otherwise({
         redirectTo: "/home"
       });
   }]);
-
 

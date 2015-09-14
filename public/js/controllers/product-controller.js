@@ -1,4 +1,15 @@
-angular.module("attire-app").controller("product-controller", function($scope, $routeParams, $location, $rootScope, ProductFactory){
+///////////////////////////////////////////////////////////////////////////////////////////
+// Product Controller
+///////////////////////////////////////////////////////////////////////////////////////////
+// Manages the data that is presented to the view and provides interaction points
+// To Back end service functionality. Attached to attire-app module. Uses Minification
+// Safe Injection mechanism
+///////////////////////////////////////////////////////////////////////////////////////////
+// Dependencies
+// $scope, $routeParams, $location, $routeScope, ProductFactory
+///////////////////////////////////////////////////////////////////////////////////////////
+
+angular.module("attire-app").controller("ProductController", function($scope, $routeParams, $location, $rootScope, ProductFactory){
 
 	var promise=ProductFactory.getProductsForGroupCategory($routeParams.group,$routeParams.category);
 	promise.success(function(response){
@@ -14,4 +25,5 @@ angular.module("attire-app").controller("product-controller", function($scope, $
 	};
 
 });
+ProductController.$inject = ["$scope","$routeParams","$location","$rootScope","ProductFactory"];
 
