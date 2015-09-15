@@ -35,20 +35,26 @@ angular.module("attire-app").factory("BasketFactory",function(){
 	// 				: Quantity of Product to Add
 	// Returns		: Basket
 	//////////////////////////////////////////////////////////////////////
-	var addToBasket = function(product, quantity){
+	var addToBasket = function(product, productOptions){
 
 		var matchingBasketItem=findItemInBasket(product);
 		var price = Number(product.price.replace(/[^0-9\.]+/g,""));
 		if(matchingBasketItem){
-			matchingBasketItem.quantity += quantity;
-			matchingBasketItem.subTotal = matchingBasketItem.quantity * price;
+			var currentQuantity = matchingBasketItem.productOptions.quantityOption;
+			var updatedQuantity = productOptions.quantityOption + currentQuantity;
+			productOptions.quantityOption=updatedQuantity;
+			matchingBasketItem.productOptions=productOptions;
+			matchingBasketItem.subTotal = updatedQuantity * price;
+			basket.total += (updatedQuantity-currentQuantity) * price;
+			basket.count += (updatedQuantity-currentQuantity);
 		}
 		else{
-			var newBasketItem = {product:product,quantity:quantity,subTotal:quantity * price};
+			var newBasketItem = {product:product,productOptions:productOptions,subTotal:productOptions.quantityOption * price};
 			basket.items.push(newBasketItem);
+			basket.total += productOptions.quantityOption * price;
+		    basket.count += productOptions.quantityOption;
 		}
-		basket.total += quantity * price;
-		basket.count += quantity;
+
 		return basket;
 	};
 

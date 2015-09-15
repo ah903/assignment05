@@ -66,6 +66,7 @@ block content
       +navbar_item("/#/products/Boys/Accessories") Accessories
       +navbar_item_divider
       +navbar_item("#") Sale
-    +navbar_item("/#/basket","BasketController") Basket {{Total | currency}}
+    +navbar_item("/#/basket","BasketController") Basket 
+      span.badge {{Basket.count}}
     +navbar_item("/#/login","LoginController") Login
   div(ng-view)   

@@ -16,6 +16,8 @@ angular.module("attire-app").controller("DetailController", ["$scope","$routePar
 	///////////////////////////////////////////////////////////////////////////
 	ProductFactory.getProductById($routeParams.productId).then(function(response){
 		$scope.CurrentProduct=response;	
+		$scope.sizeOption = response.sizes[0];
+		$scope.colorOption = response.colors[0];	
 	})
 
 	///////////////////////////////////////////////////////////////////////////
@@ -28,9 +30,17 @@ angular.module("attire-app").controller("DetailController", ["$scope","$routePar
 	///////////////////////////////////////////////////////////////////////////
 	// Parameters : product
 	///////////////////////////////////////////////////////////////////////////
-	$scope.AddToBasket = function(product, quantity){
-		quantity = quantity || 1;
-		$scope.Basket = BasketFactory.addToBasket(product,quantity);
+	$scope.AddToBasket = function(product){
+		
+		var sOption = $scope.sizeOption;
+		var cOption = $scope.colorOption;
+		
+		var productOptions = {
+			quantityOption:1,
+			sizeOption:$scope.sizeOption,
+			colorOption:$scope.colorOption
+		};
+		$scope.Basket = BasketFactory.addToBasket(product,productOptions);
 		$rootScope.$broadcast("OnBasketChanged",$scope.Basket);
 	}
 

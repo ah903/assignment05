@@ -10,12 +10,13 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 angular.module("attire-app").controller("BasketController", ["$scope","$rootScope","BasketFactory", function($scope,$rootScope,BasketFactory){
    
+
     $rootScope.$on("OnBasketChanged",loadBasket);
     loadBasket();
 
     function loadBasket(){
 	    var currentBasket=BasketFactory.getBasket();
-    	$scope.Total=currentBasket.total;
+    	$scope.Basket=currentBasket;
     }
 
 }]);
