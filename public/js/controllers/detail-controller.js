@@ -9,7 +9,7 @@
 // $scope, $routeParams, $location, $routeScope, ProductFactory
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-angular.module("attire-app").controller("DetailController", ["$scope","$routeParams","ProductFactory","BasketFactory",function($scope,$routeParams,ProductFactory,BasketFactory){
+angular.module("attire-app").controller("DetailController", ["$scope","$routeParams","$rootScope","ProductFactory","BasketFactory",function($scope,$routeParams,$rootScope,ProductFactory,BasketFactory){
 
 	///////////////////////////////////////////////////////////////////////////
 	// Initial View - Load Data When Controller Is Instantiated
@@ -21,14 +21,26 @@ angular.module("attire-app").controller("DetailController", ["$scope","$routePar
 	///////////////////////////////////////////////////////////////////////////
 	// Controller Functions Exposed to View By Scope
 	///////////////////////////////////////////////////////////////////////////
-	$scope.AddToBasket = function(product){
-		$scope.Basket = BasketFactory.addToBasket(product,1);
+	// AddToBasket
+	// Adds the product To The Shopping Basket
+	// Issues an OnBasketChanged Notification via rootscope to ensure
+	// Sibling controllers receive the message
+	///////////////////////////////////////////////////////////////////////////
+	// Parameters : product
+	///////////////////////////////////////////////////////////////////////////
+	$scope.AddToBasket = function(product, quantity){
+		quantity = quantity || 1;
+		$scope.Basket = BasketFactory.addToBasket(product,quantity);
+		$rootScope.$broadcast("OnBasketChanged",$scope.Basket);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-	// Controller Functions Exposed to View By Scope
+	// GetBasket
+	// Sets The Scope Shopping Basket for the view to consume
 	///////////////////////////////////////////////////////////////////////////
-	$scope.GetBasket = function(product){
+	// Parameters : None
+	///////////////////////////////////////////////////////////////////////////
+	$scope.GetBasket = function(){
 		$scope.Basket = BasketFactory.getBasket();
 	}
 
