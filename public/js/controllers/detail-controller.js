@@ -9,7 +9,7 @@
 // $scope, $routeParams, $location, $routeScope, ProductFactory
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-angular.module("attire-app").controller("DetailController", ["$scope","$routeParams","ProductFactory",function($scope,$routeParams,ProductFactory){
+angular.module("attire-app").controller("DetailController", ["$scope","$routeParams","ProductFactory","BasketFactory",function($scope,$routeParams,ProductFactory,BasketFactory){
 
 	///////////////////////////////////////////////////////////////////////////
 	// Initial View - Load Data When Controller Is Instantiated
@@ -17,5 +17,19 @@ angular.module("attire-app").controller("DetailController", ["$scope","$routePar
 	ProductFactory.getProductById($routeParams.productId).then(function(response){
 		$scope.CurrentProduct=response;	
 	})
+
+	///////////////////////////////////////////////////////////////////////////
+	// Controller Functions Exposed to View By Scope
+	///////////////////////////////////////////////////////////////////////////
+	$scope.AddToBasket = function(product){
+		$scope.Basket = BasketFactory.addToBasket(product,1);
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+	// Controller Functions Exposed to View By Scope
+	///////////////////////////////////////////////////////////////////////////
+	$scope.GetBasket = function(product){
+		$scope.Basket = BasketFactory.getBasket();
+	}
 
 }]);

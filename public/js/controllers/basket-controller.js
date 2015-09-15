@@ -8,7 +8,9 @@
 // Dependencies
 // $scope
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("BasketController", ["$scope",function($scope){
+angular.module("attire-app").controller("BasketController", ["$scope","BasketFactory", function($scope,BasketFactory){
     console.log("Basket Controller");
-    $scope.greeting="Welcome Andrew Basket Controller";
+    var currentBasket=BasketFactory.getBasket();
+    $scope.Total=currentBasket.total;
+
 }]);

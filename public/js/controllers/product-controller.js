@@ -11,6 +11,7 @@
 
 angular.module("attire-app").controller("ProductController", ["$scope","$routeParams","ProductFactory",function($scope, $routeParams,ProductFactory){
 
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Initial View - Load Data When Controller Is Instantiated
 	///////////////////////////////////////////////////////////////////////////
@@ -18,5 +19,6 @@ angular.module("attire-app").controller("ProductController", ["$scope","$routePa
 	promise.success(function(response){
 		$scope.products=response;
 	});
+
 
 }]);
