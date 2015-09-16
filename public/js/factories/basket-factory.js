@@ -37,43 +37,106 @@ angular.module("attire-app").factory("BasketFactory",function(){
 	//////////////////////////////////////////////////////////////////////
 	var addToBasket = function(product, productOptions){
 
-		var matchingBasketItem=findItemInBasket(product);
+		var matchingBasketItem=findItemInBasket(product,productOptions);
 		var price = Number(product.price.replace(/[^0-9\.]+/g,""));
 		if(matchingBasketItem){
-			var currentQuantity = matchingBasketItem.productOptions.quantityOption;
-			var updatedQuantity = productOptions.quantityOption + currentQuantity;
-			productOptions.quantityOption=updatedQuantity;
-			matchingBasketItem.productOptions=productOptions;
-			matchingBasketItem.subTotal = updatedQuantity * price;
-			basket.total += (updatedQuantity-currentQuantity) * price;
-			basket.count += (updatedQuantity-currentQuantity);
+			var newQuantity = matchingBasketItem.quantity + productOptions.quantityOption;
+			matchingBasketItem.productOptions.quantity=newQuantity;
+			matchingBasketItem.quantity=newQuantity;
+			matchingBasketItem.price=price;
 		}
 		else{
-			var newBasketItem = {product:product,productOptions:productOptions,subTotal:productOptions.quantityOption * price};
+			var newBasketItem = {
+				product:product,
+				productOptions:productOptions,
+				price:price,
+				quantity:productOptions.quantityOption
+			};
 			basket.items.push(newBasketItem);
-			basket.total += productOptions.quantityOption * price;
-		    basket.count += productOptions.quantityOption;
 		}
-
+		calculateBasket(basket);
 		return basket;
 	};
+
+	//////////////////////////////////////////////////////////////////////
+	// updateBasket
+	//////////////////////////////////////////////////////////////////////
+	// Recalculates the contents of the basket
+	// 
+	// Returns the update basket
+	//////////////////////////////////////////////////////////////////////
+	// Parameters 	: Product To Look For
+	//				: Product Options
+	// Returns		: Object or Null
+	//////////////////////////////////////////////////////////////////////
+	var updateBasket = function(basketItem){
+		if(!basketItem.quantity) return;
+		basketItem.productOptions.quantity=basketItem.quantity;
+		calculateBasket(basket);
+		return basket;
+	}
+
 
 	//////////////////////////////////////////////////////////////////////
 	// findItemInBasket
 	//////////////////////////////////////////////////////////////////////
 	// Helper Function To Look for Matching Products In The Basket
+	// Matches on productId, Size and Color
 	// Returns the relevant Basket Entry object if Found
 	//////////////////////////////////////////////////////////////////////
 	// Parameters 	: Product To Look For
+	//				: Product Options
 	// Returns		: Object or Null
 	//////////////////////////////////////////////////////////////////////
-	function findItemInBasket(product){
+	function findItemInBasket(product,productOptions){
+
 		for(var i=0; i < basket.items.length; i++){
-			if(basket.items[i].product.productId===product.productId){
-				return basket.items[i];
+			var basketItem = basket.items[i];
+			if(basketItem.product.productId===product.productId 
+				&& basketItem.productOptions.sizeOption===productOptions.sizeOption
+				&& basketItem.productOptions.colorOption===productOptions.colorOption){
+				return basketItem;
 			}
 		}
 		return null;
+	}
+
+	//////////////////////////////////////////////////////////////////////
+	// calculateBasket
+	//////////////////////////////////////////////////////////////////////
+	// Helper Function To Recalculate the Basket. Recalculates each line 
+	// item subtotal and the overall value of the basket. Updates the 
+	// basket object directly with the product count and overall total
+	//////////////////////////////////////////////////////////////////////
+	// Parameters 	: Basket to calculate
+	// Returns		: None
+	//////////////////////////////////////////////////////////////////////
+	function calculateBasket(basket){
+		
+		var basketTotal = 0.00;
+		var basketCount = 0;
+		
+		for(var i=0; i < basket.items.length; i++){
+			basket.items[i].subTotal=calculateItem(basket.items[i].price, basket.items[i].quantity);
+			basketTotal += basket.items[i].subTotal;
+			basketCount += basket.items[i].quantity;
+		}
+		basket.total=basketTotal;
+		basket.count=basketCount;
+	}
+
+	//////////////////////////////////////////////////////////////////////
+	// calculateItem
+	//////////////////////////////////////////////////////////////////////
+	// Helper Function To Recalculate a line item in the  Basket. 
+	// Recalculates each line subtotal an returns the value
+	//////////////////////////////////////////////////////////////////////
+	// Parameters 		: Price of item
+	//					: Quantity
+	// Returns			: Subtotal
+	//////////////////////////////////////////////////////////////////////
+	function calculateItem(price, quantity){
+		return  price * quantity;
 	}
 	
 	//////////////////////////////////////////////////////////////////////
@@ -91,6 +154,7 @@ angular.module("attire-app").factory("BasketFactory",function(){
 
 	return{
 		addToBasket:addToBasket,
+		updateBasket:updateBasket,
 		getBasket:getBasket
 	}
 

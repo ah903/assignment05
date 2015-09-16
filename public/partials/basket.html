@@ -37,10 +37,10 @@
 					</select>	
 				</div>
 				<div class="col-sm-3">Quantity: 
-					<input type="number" min="1" max="5" class="form-control" ng-model="item.productOptions.quantityOption" ng-change="updateBasket(item)"></input>
+					<input type="number" min="1" max="5" class="form-control" ng-model="item.quantity" ng-change="updateBasket(item)"></input>
 				</div>
 				<div class="col-sm-3">SubTotal:
-					<p><button ng-Click="AddToBasket(item.product,item.productOptions)" class="btn btn-default pull-right">Update</button></p>
+					<p><strong>{{item.subTotal | currency}}</strong></p>
 				</div>	
 			</div>	
 		</div>

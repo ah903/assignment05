@@ -15,12 +15,11 @@ angular.module("attire-app").controller("BasketController", ["$scope","$rootScop
     loadBasket();
 
     function loadBasket(){
-	    var currentBasket=BasketFactory.getBasket();
-    	$scope.Basket=currentBasket;
+	    $scope.Basket=BasketFactory.getBasket();
     }
 
     $scope.updateBasket = function(basketItem){
-    	console.log("Update Basket");
+    	BasketFactory.updateBasket(basketItem);
     }
 
 }]);
