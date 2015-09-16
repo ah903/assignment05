@@ -19,4 +19,8 @@ angular.module("attire-app").controller("BasketController", ["$scope","$rootScop
     	$scope.Basket=currentBasket;
     }
 
+    $scope.updateBasket = function(basketItem){
+    	console.log("Update Basket");
+    }
+
 }]);
