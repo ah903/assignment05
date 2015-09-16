@@ -40,11 +40,18 @@
 					<input type="number" min="1" max="5" class="form-control" ng-model="item.quantity" ng-change="updateBasket(item)"></input>
 				</div>
 				<div class="col-sm-3">SubTotal:
-					<p><strong>{{item.subTotal | currency}}</strong></p>
+					<div class="row">
+						<div class="col-sm-6">
+							<p><strong>{{item.subTotal | currency}}</strong></p>
+						</div>
+						<div class="col-sm-6">
+							<button ng-click="removeFromBasket(item)" class="btn btn-default pull-right"><span class="glyphicon glyphicon-trash"></span></button>
+						</div>
+					</div>
 				</div>	
 			</div>	
 		</div>
-		<p>&nbsp;</p>
+		<p>&nbsp;<hr></p>
 	</div>
 	
 </div>

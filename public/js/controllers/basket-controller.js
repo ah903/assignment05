@@ -22,4 +22,8 @@ angular.module("attire-app").controller("BasketController", ["$scope","$rootScop
     	BasketFactory.updateBasket(basketItem);
     }
 
+     $scope.removeFromBasket = function(basketItem){
+    	BasketFactory.removeFromBasket(basketItem);
+    }
+
 }]);

@@ -67,7 +67,7 @@ angular.module("attire-app").factory("BasketFactory",function(){
 	//////////////////////////////////////////////////////////////////////
 	// Parameters 	: Product To Look For
 	//				: Product Options
-	// Returns		: Object or Null
+	// Returns		: Basket
 	//////////////////////////////////////////////////////////////////////
 	var updateBasket = function(basketItem){
 		if(!basketItem.quantity) return;
@@ -76,7 +76,23 @@ angular.module("attire-app").factory("BasketFactory",function(){
 		return basket;
 	}
 
-
+	//////////////////////////////////////////////////////////////////////
+	// removeFromBasket
+	//////////////////////////////////////////////////////////////////////
+	// Removes the selected item from the Basket and Recalculates
+	// Finds the selected item based on productId, color and size
+	// Returns the update basket
+	//////////////////////////////////////////////////////////////////////
+	// Parameters 	: Basket Item To Look For
+	// Returns		: Basket
+	//////////////////////////////////////////////////////////////////////
+	var removeFromBasket = function(basketItem){
+		if(!basketItem) return;
+		var index = basket.items.indexOf(basketItem);
+		basket.items.splice(index,1);
+		calculateBasket(basket);
+		return basket;
+	}
 	//////////////////////////////////////////////////////////////////////
 	// findItemInBasket
 	//////////////////////////////////////////////////////////////////////
@@ -155,6 +171,7 @@ angular.module("attire-app").factory("BasketFactory",function(){
 	return{
 		addToBasket:addToBasket,
 		updateBasket:updateBasket,
+		removeFromBasket:removeFromBasket,
 		getBasket:getBasket
 	}
 
