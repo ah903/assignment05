@@ -99,12 +99,8 @@
       "large": "http://placehold.it/800x400?text=Main Image"
     },
     "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "XXL"
+      "XS Extra Small", "S Small", "M Medium", "L Large", "XL Extra large"
+  
     ],
     "colors": [
       "Black",
@@ -143,12 +139,8 @@
       "large": "http://placehold.it/800x400?text=Main Image"
     },
     "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "XXL"
+      "XS Extra Small", "S Small", "M Medium", "L Large", "XL Extra large"
+  
     ],
     "colors": [
       "Black",
@@ -187,12 +179,7 @@
       "large": "http://placehold.it/800x400?text=Main Image"
     },
     "sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-      "XXL"
+      "XS Extra Small", "S Small", "M Medium", "L Large", "XL Extra large"
     ],
     "colors": [
       "Black",
