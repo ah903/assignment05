@@ -8,12 +8,12 @@
 // Dependencies
 // $scope
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("LoginController", ["$scope","$location","CustomerFactory", function($scope,$location,CustomerFactory){
+angular.module("attire-app").controller("LoginController", ["$scope","$location","$rootScope","CustomerFactory", function($scope,$location,$rootScope,CustomerFactory){
     
 
     var AUTHENTICATION_ERROR = "Incorrect username or password"
 
-    $scope.currentUser = CustomerFactory.currentUser();
+    //$scope.currentUser = {name:"Alan"};
 
     $scope.login = function(user){
         
@@ -22,7 +22,7 @@ angular.module("attire-app").controller("LoginController", ["$scope","$location"
         CustomerFactory.login(user,function(response){
             if(response){
                 console.log("Authenticated");
-                $scope.currentUser = CustomerFactory.currentUser();
+                $rootScope.CurrentUser = response;
                 $location.url("/home");
             }
             else{
@@ -32,11 +32,7 @@ angular.module("attire-app").controller("LoginController", ["$scope","$location"
     };
 
     $scope.logout = function(){
-    	CustomerFactory.logout(function(response){
-    		if(response){
-                $scope.currentUser = CustomerFactory.currentUser();
-            }
-     	});
-    }
+        $rootScope.CurrentUser = null;
+    };
 
 }]);

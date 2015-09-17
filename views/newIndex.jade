@@ -68,6 +68,6 @@ block content
       +navbar_item("#") Sale
     +navbar_item("/#/basket")(ng-controller="BasketController") Basket 
       span.badge {{Basket.count}}
-    +navbar_item("/#/login")(ng-controller="LoginController" ng-show="!currentUser") Login
-    +navbar_item("/#/login")(ng-controller="LoginController" ng-show="currentUser") Logout
+    +navbar_item("/#/login")(ng-controller="LoginController" ng-show="!CurrentUser") Login
+    +navbar_item("")(ng-controller="LoginController" ng-show="CurrentUser" ng-click="logout()") Logout
   div(ng-view)   
