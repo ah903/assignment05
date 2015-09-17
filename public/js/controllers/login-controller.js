@@ -23,10 +23,10 @@ angular.module("attire-app").controller("LoginController", ["$scope","$location"
             if(response){
                 console.log("Authenticated");
                 $scope.currentUser = CustomerFactory.currentUser();
-                $location.path("/home");
+                $location.url("/home");
             }
             else{
-                $scope.error=AUTHENTICATION_ERROR;
+                $scope.loginError=AUTHENTICATION_ERROR;
             }
         });
     };

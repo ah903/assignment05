@@ -43,6 +43,7 @@ angular.module("attire-app").factory("CustomerFactory",["$http", function($http)
 		
 		$http.post(serviceEndPoint,user)
 		.success(function(response){
+			loggedInUser=response;
 			callback(response);
 		})
 

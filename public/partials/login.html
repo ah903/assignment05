@@ -1,6 +1,15 @@
 <h1>Please Sign In</h1>
 <div class="container">
-	<form action="">
+
+	
+	<!--<form action="">-->
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="alert alert-warning" ng-show="loginError">
+					<span class="glyphicon glyphicon-exclamation-sign"></span>{{" " + loginError}}
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-sm-6">
 				<label for="username">E-mail address <small>(required)</small></label>
@@ -16,5 +25,5 @@
 				<a href="#/register" class="btn btn-default">Join Up</a>
 			</div>
 		</div>
-	</form>
+	<!--</form>-->
 </div>

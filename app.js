@@ -38,6 +38,9 @@ app.use(bodyParser.json());
 // Body parser to read URL encoded data from the query string
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Multi part Form Data parser
+//app.use(multer());
+
 // Cookie Parser Reads and Processes Cookies
 app.use(cookieParser());
 
