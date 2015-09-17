@@ -24,17 +24,12 @@ router.post("/login", function(req, res, next) {
 
     console.log("Received POST Request for User");
 
-    var username = req.body.username;
-    var password = req.body.password;
+    var usernameFromBody = req.body.username;
+    var passwordFromBody = req.body.password;
 
-    customerModel.findOne({username:username}, function(err,data){
-      if(err) next(err);
-      if(!data) next();
-      if(data.password==password){
-        console.log("Authenticated Successsfully");
-        res.status(200).json(data);
-      }
-    })
+    customerModel.findOne({username:usernameFromBody,password:passwordFromBody},function(err,data){
+      res.json(data);
+    });
 });
 
 

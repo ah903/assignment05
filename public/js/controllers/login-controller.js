@@ -10,18 +10,33 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 angular.module("attire-app").controller("LoginController", ["$scope","$location","CustomerFactory", function($scope,$location,CustomerFactory){
     
-    
+
+    var AUTHENTICATION_ERROR = "Incorrect username or password"
+
+    $scope.currentUser = CustomerFactory.currentUser();
+
     $scope.login = function(user){
-        CustomerFactory.login(user).success(function(response){
-            $scope.currentUser = response;
-            $location.path("/home");  
-        });	
+        
+        $scope.error="";
+
+        CustomerFactory.login(user,function(response){
+            if(response){
+                console.log("Authenticated");
+                $scope.currentUser = CustomerFactory.currentUser();
+                $location.path("/home");
+            }
+            else{
+                $scope.error=AUTHENTICATION_ERROR;
+            }
+        });
     };
 
     $scope.logout = function(){
-    	CustomerFactory.logout().then(function(response){
-    		console.login("Logout Factory Method");
-    	});
+    	CustomerFactory.logout(function(response){
+    		if(response){
+                $scope.currentUser = CustomerFactory.currentUser();
+            }
+     	});
     }
 
 }]);

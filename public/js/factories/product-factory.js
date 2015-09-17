@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// Factory Pattern
+// Product Factory 
 // Singleton Factory Responsible for managing connection to backend database
 // Follows a pattern of using $http object to connect to an API endpoint
 // and post processing the promise with the .then construct to make it simpler

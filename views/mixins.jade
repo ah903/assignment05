@@ -32,9 +32,13 @@ mixin navbar_dropdown(href, controller, active)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Navbar Item Link or Dropdown
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-mixin navbar_item(href, controller, active)
-    li(class=active)&attributes({"ng-controller":controller}): a( href=href )
+mixin navbar_item(href, attributes)
+    li&attributes(attributes): a( href=href )
         block
+
+//mixin navbar_item(href, active,controller)
+//    li(class=active)&attributes({"ng-controller":controller}): a( href=href )
+//        block
 
 //mixin navbar_item(href, active)
 //    li(class=active): a( href=href )
