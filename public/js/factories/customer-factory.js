@@ -15,39 +15,73 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 angular.module("attire-app").factory("CustomerFactory",["$http", function($http){
 
+	////////////////////////////////////////////////////////////////////////
+	// Factory Configuration 
+	////////////////////////////////////////////////////////////////////////
+	var serviceEndPoints = {
+		LoginEndPoint : "/api/customers/login",
+		RegisterEndPoint : "/api/customers/register"
+	};
 
 	/////////////////////////////////////////////////////////////////////////
-	// Function login
+	// Function loginUser
 	/////////////////////////////////////////////////////////////////////////
 	// Passes the user credentials to the server for authentication
+	// Waits for the Promise and returns the response to the caller
+	// so the caller is unaware of the server side interface
 	/////////////////////////////////////////////////////////////////////////
-	// Returns Promise	
+	// Returns customer object	
 	/////////////////////////////////////////////////////////////////////////
-	var login = function(user, callback){
-		var serviceEndPoint = "/api/customers/login";
-		
-		$http.post(serviceEndPoint,user)
+	var loginUser = function(user, callback){	
+		$http.post(serviceEndPoints.LoginEndPoint,user)
 		.success(function(response){
-			loggedInUser=response;
 			callback(response);
 		})
 
-
-		//var promise = $http.post(serviceEndPoint,user);
-		//promise.then(function(results){
-		//	if(results.data) loggedInUser=results.data;
-		//	return results.data;
-		//});
-		//return promise;
 	};
 
+	/////////////////////////////////////////////////////////////////////////
+	// Function registerUser
+	/////////////////////////////////////////////////////////////////////////
+	// Passes the user details to the server for storage. Expects the 
+	// User object to be a new object not an existing one
+	// Waits for the Promise and returns the response to the caller
+	// so the caller is unaware of the server side interface
+	/////////////////////////////////////////////////////////////////////////
+	// Returns customer object	
+	/////////////////////////////////////////////////////////////////////////
+	var registerUser = function(user,callback){
+		$http.post(serviceEndPoints.RegisterEndPoint,user)
+		.success(function(response){
+			callback(response);
+		});
+	}
+
+	/////////////////////////////////////////////////////////////////////////
+	// Function registerUser
+	/////////////////////////////////////////////////////////////////////////
+	// Passes the user details to the server for storage. Expects the 
+	// User object to be a new object not an existing one
+	// Waits for the Promise and returns the response to the caller
+	// so the caller is unaware of the server side interface
+	/////////////////////////////////////////////////////////////////////////
+	// Returns customer object	
+	/////////////////////////////////////////////////////////////////////////
+	var updateUser = function(user,callback){
+		$http.put(serviceEndPoints.RegisterEndPoint,user)
+		.success(function(response){
+			callback(response);
+		});
+	}
 
 	/////////////////////////////////////////////////////////////////////////
 	// Public Interface to the Factory Exposed as an Object literal
 	// Set of pointers to private functions
 	/////////////////////////////////////////////////////////////////////////
 	return{
-		login:login
+		loginUser:loginUser,
+		registerUser:registerUser,
+		updateUser:updateUser
 	};
 
 }]);

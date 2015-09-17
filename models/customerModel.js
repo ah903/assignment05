@@ -30,9 +30,9 @@ var customerSchema = new mongoose.Schema({
 	card		: 	
 	{
 		cardtype	: {type: String, enum: ["Mastercard", "Amex", "Visa"]},
-		cardnumber	: {type: String, required : true},
-		expirydate	: {type: Date  , required : true},
-		cvcode		: {type: Number, required : true} 		
+		cardnumber	: {type: String, required : false},
+		expirydate	: {type: Date  , required : false},
+		cvcode		: {type: Number, required : false} 		
 	}			  
 
 }, {collection:"customers"});

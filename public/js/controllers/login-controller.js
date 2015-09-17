@@ -10,27 +10,46 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 angular.module("attire-app").controller("LoginController", ["$scope","$location","$rootScope","CustomerFactory", function($scope,$location,$rootScope,CustomerFactory){
     
+    //////////////////////////////////////////////////////////////////////////
+    // Error Messages Type
+    //////////////////////////////////////////////////////////////////////////
+    var ErrorMessages = {
+        ErrorAuthenticationMessage : "Incorrect username or password"
+    };
 
-    var AUTHENTICATION_ERROR = "Incorrect username or password"
-
-    //$scope.currentUser = {name:"Alan"};
-
+    ///////////////////////////////////////////////////////////////////////////
+    // Controller Functions Exposed to View By Scope
+    ///////////////////////////////////////////////////////////////////////////
+    // login
+    // Logs the user into the system by testing the supplied credential
+    // Either redirects and sets the CurrentUser in the root scope if the
+    // operation is successful or sets an error message 
+    ///////////////////////////////////////////////////////////////////////////
+    // Parameters : user
+    ///////////////////////////////////////////////////////////////////////////
     $scope.login = function(user){
         
-        $scope.error="";
-
-        CustomerFactory.login(user,function(response){
+        CustomerFactory.loginUser(user,function(response){
             if(response){
-                console.log("Authenticated");
+                $scope.loginError="";
                 $rootScope.CurrentUser = response;
                 $location.url("/home");
             }
             else{
-                $scope.loginError=AUTHENTICATION_ERROR;
+                $scope.errorMessage=ErrorMessages.ErrorAuthenticationMessage;
             }
         });
     };
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Controller Functions Exposed to View By Scope
+    ///////////////////////////////////////////////////////////////////////////
+    // logout
+    // Clears the current logged in user by resetting the state of the
+    // CurrentUser in the RootScope
+    ///////////////////////////////////////////////////////////////////////////
+    // Parameters : None
+    ///////////////////////////////////////////////////////////////////////////
     $scope.logout = function(){
         $rootScope.CurrentUser = null;
     };
