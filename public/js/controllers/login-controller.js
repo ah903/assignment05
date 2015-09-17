@@ -8,7 +8,20 @@
 // Dependencies
 // $scope
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("LoginController", ["$scope",function($scope){
-    console.log("Login Controller");
-    $scope.greeting="Welcome Andrew Login Controller";
+angular.module("attire-app").controller("LoginController", ["$scope","$location","CustomerFactory", function($scope,$location,CustomerFactory){
+    
+    
+    $scope.login = function(user){
+        CustomerFactory.login(user).success(function(response){
+            $scope.currentUser = response;
+            $location.path("/home");  
+        });	
+    };
+
+    $scope.logout = function(){
+    	CustomerFactory.logout().then(function(response){
+    		console.login("Logout Factory Method");
+    	});
+    }
+
 }]);

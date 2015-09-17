@@ -46,5 +46,6 @@ angular.module("attire-app").config(["$routeProvider", function($routeProvider) 
       otherwise({
         redirectTo: "/home"
       });
+
   }]);
 

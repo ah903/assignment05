@@ -17,6 +17,7 @@ var mongoose = require("mongoose");
 var customerSchema = new mongoose.Schema({
 	
 	username	:   {type : String, required : true, index: true}, 
+	password	:   {type : String, required : true}, 
 	name		: 	{type : String, required : true, index: true},					
 	address		: 	
 	{

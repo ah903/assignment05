@@ -15,7 +15,7 @@ angular.module("attire-app").controller("DetailController", ["$scope","$routePar
 	// Initial View - Load Data When Controller Is Instantiated
 	///////////////////////////////////////////////////////////////////////////
 	ProductFactory.getProductById($routeParams.productId).then(function(response){
-		$scope.CurrentProduct=response;	
+		$scope.CurrentProduct = response;	
 		$scope.sizeOption = response.sizes[0];
 		$scope.colorOption = response.colors[0];	
 	})

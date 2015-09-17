@@ -66,6 +66,7 @@ app.use("/api/", function(req,res,next){
 app.use("/", routes);
 app.use("/api/products", products);
 app.use("/api/customers", customers);
+app.use("/api/login", customers);
 app.use("/api/users", users);
 
 // catch 404 and forward to error handler
