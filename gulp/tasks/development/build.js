@@ -1,0 +1,10 @@
+//////////////////////////////////////////////////////////////////
+// Gulp Task Build
+// Placeholder tasks for application specific build activities
+// required such as compilation of SASS, JS Minification
+// JSHINT
+//////////////////////////////////////////////////////////////////
+
+var gulp = require("gulp");
+
+gulp.task("build", ["lint"]);

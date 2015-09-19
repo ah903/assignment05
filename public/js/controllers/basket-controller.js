@@ -20,10 +20,10 @@ angular.module("attire-app").controller("BasketController", ["$scope","$rootScop
 
     $scope.updateBasket = function(basketItem){
     	BasketFactory.updateBasket(basketItem);
-    }
+    };
 
      $scope.removeFromBasket = function(basketItem){
     	BasketFactory.removeFromBasket(basketItem);
-    }
+    };
 
 }]);

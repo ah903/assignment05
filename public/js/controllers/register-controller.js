@@ -19,7 +19,7 @@ angular.module("attire-app").controller("RegisterController", ["$scope","$locati
 			else{
 				$scope.errorMessage="Opps";
 			}
-		})
-	}
+		});
+	};
 
 }]);

@@ -74,7 +74,7 @@ angular.module("attire-app").factory("BasketFactory",function(){
 		basketItem.productOptions.quantity=basketItem.quantity;
 		calculateBasket(basket);
 		return basket;
-	}
+	};
 
 	//////////////////////////////////////////////////////////////////////
 	// removeFromBasket
@@ -92,7 +92,8 @@ angular.module("attire-app").factory("BasketFactory",function(){
 		basket.items.splice(index,1);
 		calculateBasket(basket);
 		return basket;
-	}
+	};
+
 	//////////////////////////////////////////////////////////////////////
 	// findItemInBasket
 	//////////////////////////////////////////////////////////////////////
@@ -108,9 +109,9 @@ angular.module("attire-app").factory("BasketFactory",function(){
 
 		for(var i=0; i < basket.items.length; i++){
 			var basketItem = basket.items[i];
-			if(basketItem.product.productId===product.productId 
-				&& basketItem.productOptions.sizeOption===productOptions.sizeOption
-				&& basketItem.productOptions.colorOption===productOptions.colorOption){
+			if(basketItem.product.productId===product.productId &&
+				basketItem.productOptions.sizeOption===productOptions.sizeOption &&
+				basketItem.productOptions.colorOption===productOptions.colorOption){
 				return basketItem;
 			}
 		}
@@ -173,6 +174,6 @@ angular.module("attire-app").factory("BasketFactory",function(){
 		updateBasket:updateBasket,
 		removeFromBasket:removeFromBasket,
 		getBasket:getBasket
-	}
+	};
 
 });

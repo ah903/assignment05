@@ -18,7 +18,7 @@ angular.module("attire-app").controller("DetailController", ["$scope","$routePar
 		$scope.CurrentProduct = response;	
 		$scope.sizeOption = response.sizes[0];
 		$scope.colorOption = response.colors[0];	
-	})
+	});
 
 	///////////////////////////////////////////////////////////////////////////
 	// Controller Functions Exposed to View By Scope
@@ -42,7 +42,7 @@ angular.module("attire-app").controller("DetailController", ["$scope","$routePar
 		};
 		$scope.Basket = BasketFactory.addToBasket(product,productOptions);
 		$rootScope.$broadcast("OnBasketChanged",$scope.Basket);
-	}
+	};
 
 	///////////////////////////////////////////////////////////////////////////
 	// GetBasket
@@ -52,6 +52,6 @@ angular.module("attire-app").controller("DetailController", ["$scope","$routePar
 	///////////////////////////////////////////////////////////////////////////
 	$scope.GetBasket = function(){
 		$scope.Basket = BasketFactory.getBasket();
-	}
+	};
 
 }]);

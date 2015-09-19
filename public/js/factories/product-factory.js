@@ -40,7 +40,7 @@ angular.module("attire-app").factory("ProductFactory",["$http", function($http){
     	});
     	return promise;
 
-	}
+	};
 
 	/////////////////////////////////////////////////////////////////////////
 	// Function getProductById
@@ -65,7 +65,7 @@ angular.module("attire-app").factory("ProductFactory",["$http", function($http){
   			return currentProduct;
 		});
 
-	}
+	};
 
 
 	/////////////////////////////////////////////////////////////////////////

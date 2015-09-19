@@ -14,29 +14,37 @@
 				</div>
 			</div>
 			<div class="row">
-				<p>{{CurrentProduct.description}}</p>
+				<div class="col-sm-12">
+					<p>{{CurrentProduct.description}}</p>
+				</div>
 			</div>
 			<div class="row">
-				<h3>Choose a Color</h3>
-				<select ng-model="colorOption" class="form-control">
-    				<option ng-repeat="color in CurrentProduct.colors" ng-selected="{{color==colorOption}}" value="{{color}}">
-        				{{color}}
-    				</option>
-				</select>	
+				<div class="col-sm-12">
+					<h3>Choose a Color</h3>
+					<select ng-model="colorOption" class="form-control">
+	    				<option ng-repeat="color in CurrentProduct.colors" ng-selected="{{color==colorOption}}" value="{{color}}">
+	        				{{color}}
+	    				</option>
+					</select>
+				</div>	
 			</div>
 			<div class="row">
-				<h3>Choose your Size</h3>
-				<a href="#"><span class="glyphicon glyphicon-question-sign"/>See our sizing guide</a>
-				<select ng-model="sizeOption" class="form-control">
-    				<option ng-repeat="size in CurrentProduct.sizes" ng-selected="{{size==sizeOption}}" value="{{size}}">
-        				{{size}}
-    				</option>
-				</select>	
+				<div class="col-sm-12">
+					<h3>Choose your Size</h3>
+					<a href="#"><span class="glyphicon glyphicon-question-sign"/>See our sizing guide</a>
+					<select ng-model="sizeOption" class="form-control">
+	    				<option ng-repeat="size in CurrentProduct.sizes" ng-selected="{{size==sizeOption}}" value="{{size}}">
+	        				{{size}}
+	    				</option>
+					</select>
+				</div>	
 			</div>
 			<div class="row">
-				<p></p>
-				<button ng-click="AddToBasket(CurrentProduct)" class="btn btn-default pull-right">Add To Basket
-				</button>
+				<div class="col-sm-12">
+					<p></p>
+					<button ng-click="AddToBasket(CurrentProduct)" class="btn btn-default pull-right">Add To Basket
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

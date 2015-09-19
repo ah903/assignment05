@@ -36,7 +36,7 @@ angular.module("attire-app").factory("CustomerFactory",["$http", function($http)
 		$http.post(serviceEndPoints.LoginEndPoint,user)
 		.success(function(response){
 			callback(response);
-		})
+		});
 
 	};
 
@@ -55,7 +55,7 @@ angular.module("attire-app").factory("CustomerFactory",["$http", function($http)
 		.success(function(response){
 			callback(response);
 		});
-	}
+	};
 
 	/////////////////////////////////////////////////////////////////////////
 	// Function registerUser
@@ -72,7 +72,7 @@ angular.module("attire-app").factory("CustomerFactory",["$http", function($http)
 		.success(function(response){
 			callback(response);
 		});
-	}
+	};
 
 	/////////////////////////////////////////////////////////////////////////
 	// Public Interface to the Factory Exposed as an Object literal

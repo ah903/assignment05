@@ -9,16 +9,16 @@ var logger = require("morgan");
 var path = require("path");
 
 // Required Custom Middleware supporting the application
-var routes = require("./routes/index");
-var products = require("./routes/products");
-var customers = require("./routes/customers");
-var users = require("./routes/users");
+var routes = require("./bin/routes/index");
+var products = require("./bin/routes/products");
+var customers = require("./bin/routes/customers");
+var users = require("./bin/routes/users");
 
 // Start the server
 var app = express();
 
 // view engine setup using Jade Template Engine
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "bin/views"));
 app.set("view engine", "jade");
 app.set('view options', { pretty: true });
 
