@@ -7,7 +7,7 @@
 #reviews = "reviews"
 
 # Change Working Directory From Root
-cd "/Users/Andrew/Desktop/Masters/Module 5/Assignment/attire/testdata/generation-02"
+cd "../generation-02"
 
 # Clean Up Any Old Files
 rm product-100-out.json
@@ -66,3 +66,5 @@ mongoimport --host 127.0.0.1 --port 27017 --db attire-db0-dev --collection revie
 mongoimport --host 127.0.0.1 --port 27017 --db attire-db0-dev --collection reviews --file review-600-out.json --jsonArray
 mongoimport --host 127.0.0.1 --port 27017 --db attire-db0-dev --collection reviews --file review-700-out.json --jsonArray
 mongoimport --host 127.0.0.1 --port 27017 --db attire-db0-dev --collection reviews --file review-800-out.json --jsonArray
+
+mongoimport --host 127.0.0.1 --port 27017 --db attire-db0-dev --collection customers --drop --file customer-100-out.json --jsonArray
