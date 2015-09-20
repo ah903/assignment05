@@ -67,6 +67,24 @@ angular.module("attire-app").factory("ProductFactory",["$http", function($http){
 
 	};
 
+	/////////////////////////////////////////////////////////////////////////
+	// Function getProductsOnOffer
+	/////////////////////////////////////////////////////////////////////////
+	// Gets a dlist of products that are marked as special offer
+	// and return the data	
+	/////////////////////////////////////////////////////////////////////////
+	// Returns Promise
+	/////////////////////////////////////////////////////////////////////////
+	var getProductsOnOffer = function(promotion){
+		var serviceEndpoint = BASE_API_ENDPOINT + "?promotion=" + promotion;
+
+		var promise = $http.get(serviceEndpoint);
+		promise.then(function(results) {
+    		return results.data;
+    	});
+    	return promise;
+
+	};
 
 	/////////////////////////////////////////////////////////////////////////
 	// Public Interface to the Factory Exposed as an Object literal
@@ -74,6 +92,7 @@ angular.module("attire-app").factory("ProductFactory",["$http", function($http){
 	/////////////////////////////////////////////////////////////////////////
 	return{
 		getProductsForGroupCategory:getProductsForGroupCategory,
+		getProductsOnOffer:getProductsOnOffer,
 		getProductById:getProductById
 	};
 

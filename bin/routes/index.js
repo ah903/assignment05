@@ -6,7 +6,7 @@ var router = express.Router();
 router.get("/", function(req, res, next) {
 
 	console.log("Received GET Root Request");
-	res.render("newindex", { title: "Express" });
+	res.render("index", { title: "Express" });
 
 });
 

@@ -29,6 +29,7 @@ router.get("/", function(req, res, next) {
     console.log("Received GET Request All Products");
  	  console.log("Group " + req.query.group);
  	  console.log("Category " + req.query.category);
+    console.log("Offers " + req.query.promotion);
 
  	  /////////////////////////////////////////////////////////////////
  	  // Create a Search Query
@@ -36,22 +37,18 @@ router.get("/", function(req, res, next) {
   	// params if we need to achieve reusable support for these
   	// filters
   	////////////////////////////////////////////////////////////////
-    var options=req.pagingOptions;
-  	var query={}; 
-  	if(req.query.group) query.group=req.query.group;
+    var options=req.pagingOptions; var query={}; 
+    
+    if(req.query.group) query.group=req.query.group;
   	if(req.query.category) query.category=req.query.category; 
+    if(req.query.promotion) query.promotion=req.query.promotion; 
+    
   	productModel.find(query).limit(options.size).skip(options.skip).exec(function(err, data){
         if(err) next(err);
         if(!data) next();
         res.status(200).json(data);
     });
 
-    // Execute the database query and return a 200 if successful
-  	//productModel.find(query,options,function(err,data){
-  	//	if(err) next(err);
-  	//	if(!data) next();
-		//res.status(200).json(data);
-  	//});
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -204,5 +201,8 @@ router.delete("/:productId/reviews/:reviewId", function(req, res, next) {
 		res.status(204).send();	
   	});
 });
+
+
+
 
 module.exports = router;

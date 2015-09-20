@@ -1,7 +1,42 @@
-<h1>Home</h1>
-<div ng-controller="LoginController" ng-show="CurrentUser">
-{{CurrentUser.username}}
+<div class="container">
+	<div class="row">
+		<h2>New In Stock</h2>
+		<div class="col-sm-12 text-center">
+			<a href="/#/product/{{newStock[0].productId}}">
+				<img ng-src="{{newStock[0].pictures.large}}" alt="{{newStock[0].title}}" />
+				<p>{{newStock[0].title}}</p>
+			</a>
+		</div>
+	</div>
+	<div class="row">
+		<h2>Special Offers</h2>
+		<div class="col-sm-3 text-center">
+			<a href="/#/product/{{specialOffers[0].productId}}">
+				<img ng-src="{{specialOffers[0].pictures.small}}" alt="{{specialOffers[0].title}}" />
+				<p>{{specialOffers[0].title}}</p>
+				<p>{{specialOffers[0].price}}</p>
+		   </a>
+		</div>
+		<div class="col-sm-3 text-center">
+			<a href="/#/product/{{specialOffers[1].productId}}">
+				<img ng-src="{{specialOffers[1].pictures.small}}" alt="{{specialOffers[1].title}}" />
+				<p>{{specialOffers[1].title}}</p>
+				<p>{{specialOffers[1].price}}</p>
+			</a>
+		</div>
+		<div class="col-sm-3 text-center">
+			<a href="/#/product/{{specialOffers[2].productId}}">
+				<img ng-src="{{specialOffers[2].pictures.small}}" alt="{{specialOffers[2].title}}" />
+				<p>{{specialOffers[2].title}}</p>
+				<p>{{specialOffers[2].price}}</p>
+			</a>
+		</div>
+		<div class="col-sm-3 text-center">
+			<a href="/#/product/{{specialOffers[3].productId}}">
+				<img ng-src="{{specialOffers[3].pictures.small}}" alt="{{specialOffers[3].title}}" />
+				<p>{{specialOffers[3].title}}</p>
+				<p>{{specialOffers[3].price}}</p>
+			</a>
+		</div>
+	</div>
 </div>
-
-<input type="text" placeholder="Name" ng-model="name" title="Enter your name"/>
-<p>{{name}}</p>
