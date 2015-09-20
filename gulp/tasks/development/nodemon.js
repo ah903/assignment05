@@ -17,7 +17,7 @@ gulp.task("nodemon", ["build"], function (callback) {
 	// Return the stream so it can be chained with other
 	// functionality
 	////////////////////////////////////////////////////////
-	return nodemon({script: "./bin/www"}).on("start", function () {
+	nodemon({script: "./bin/www"}).on("start", function () {
 		if (!started) {
 			callback();
 			started = true; 

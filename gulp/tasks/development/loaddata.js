@@ -9,7 +9,7 @@
 var gulp = require("gulp");
 var exec = require("child_process").exec;
 
-gulp.task("loaddata", ["database-start"], function (callback) {
+gulp.task("loaddata", function (callback) {
   
 
 	//Import Product Test Data
@@ -69,10 +69,10 @@ gulp.task("loaddata", ["database-start"], function (callback) {
     exec(createImportCommand("./bin/testdata/generation-02/customer-100-out.json","customer",true),function(err, stdout, stderr){
  		console.log(stdout);
      	console.log(stderr);
+     	// Important : Signal That the Process is completed
+     	callback(null);
 	});
 
-    callback(null);
- 
   
     function createImportCommand(filename, collection, dropCollection){
     	
@@ -90,7 +90,6 @@ gulp.task("loaddata", ["database-start"], function (callback) {
 		if(dropCollection)
 			command += " --drop";
 		
-		console.log(command);
 		return command;
     };
 

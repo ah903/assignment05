@@ -1,3 +1,6 @@
 var gulp = require("gulp");
+var runSequence = require("run-sequence");
 
-gulp.task("default", ["database-start","build","watch"]);
+gulp.task("default", function(callback) {
+  	runSequence("database-start","build", "watch", callback);
+});

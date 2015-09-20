@@ -6,12 +6,36 @@
 //////////////////////////////////////////////////////////////////
 var gulp = require("gulp");
 var exec = require("child_process").exec;
+var mongo= require("mongodb").MongoClient, assert = require('assert');
 
 gulp.task("database-start", function (callback) {
-  exec("mongod --dbpath ./data", function (err, stdout, stderr) {
-    console.log("database startup: " + stdout);
-    console.log("database error: " + stderr);
-    console.log("error :" + err);
-    callback(err);
-  });
+  
+    var attempts = 0;
+  	checkServer();
+  	var timer = setInterval(checkServer,1000)
+	
+  	function startServer(){
+  		attempts++;
+  		exec("mongod --dbpath ./data");
+	  }
+
+	function checkServer(){
+		
+    if(attempts > 3){
+			clearTimeout(timer);
+			callback("Data Base Server Not Running");
+		}
+        mongo.connect('mongodb://localhost:27017/attire-db0-dev', function (error, database) {
+            if (error) {
+            	console.log(error);
+                startServer();
+            } else {
+                console.log("Database Server is Running");
+                clearTimeout(timer);
+                callback();
+            }
+        });
+	}
 })
+
+
