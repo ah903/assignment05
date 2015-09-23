@@ -17,7 +17,7 @@ angular.module("attire-app").controller("RegisterController", ["$scope","$locati
 				$location.path("/home");		
 			}
 			else{
-				$scope.errorMessage="Opps";
+				$scope.errorMessage="Error Registering User";
 			}
 		});
 	};
