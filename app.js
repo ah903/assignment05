@@ -67,7 +67,9 @@ app.use(express.static(path.join(__dirname, "public")));
 ////////////////////////////////////////////////////////////////////////////////
 // Connect to the database
 ////////////////////////////////////////////////////////////////////////////////
-mongoose.connect(app.get("db") || "mongodb://localhost:27017/attire-db0-dev")
+var connectionString = (process.env.MONGOLAB_URI || "mongodb://localhost:27017/attire-db0-dev");
+console.log(connectionString);
+mongoose.connect(connectionString);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global Middleware to handle requests for pagination. Extracts
