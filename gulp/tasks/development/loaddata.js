@@ -76,20 +76,32 @@ gulp.task("loaddata", function (callback) {
   
     function createImportCommand(filename, collection, dropCollection){
     	
-    	var importConfig = {
-    		host : "127.0.0.1",
-    		port : "27017",
-    		dbns : "attire-db0-dev"	
+    	//var importConfig = {
+    	//	host : "127.0.0.1",
+    	//	port : "27017",
+    	//	dbns : "attire-db0-dev"	
+    	//};
+
+   		var importConfig = {
+    		host : "ds051873.mongolab.com",
+    		port : "51873",
+    		dbns : "heroku_hl48jg51",	
+    		user : "'att1re'",
+    		pswd : "'att1re'"
     	};
+
 
     	var command = "mongoimport --jsonArray --host " + importConfig.host;
     	command += " --port " + importConfig.port;
     	command += " --db " + importConfig.dbns;	
 		command += " --collection " + collection;	
 		command += " --file " + filename;
+		if(importConfig.user) command += " -u " + importConfig.user;
+		if(importConfig.pswd) command += " -p " + importConfig.pswd;
 		if(dropCollection)
 			command += " --drop";
 		
+		console.log(command);
 		return command;
     };
 
