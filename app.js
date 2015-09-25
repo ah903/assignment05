@@ -17,7 +17,6 @@ var nconf = require("nconf");
 var routes = require("./bin/routes/index");
 var products = require("./bin/routes/products");
 var customers = require("./bin/routes/customers");
-var users = require("./bin/routes/users");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Start the server
@@ -101,7 +100,7 @@ app.use("/", routes);
 app.use("/api/products", products);
 app.use("/api/customers", customers);
 app.use("/api/login", customers);
-app.use("/api/users", users);
+//app.use("/api/users", users);
 
 ////////////////////////////////////////////////////////////////////////////////
 // catch 404 and forward to error handler

@@ -15,19 +15,19 @@ angular.module("attire-app").controller("HomeController", ["$scope","ProductFact
 		SpecialOffer:"Special Offer",
 		NewCollection:"New",
 		Save10Percent:"Save 10%",
-		Save10Percent:"Save 20%"
+		Save20Percent:"Save 20%"
 	};
 
 	///////////////////////////////////////////////////////////////////////////
 	// Initial View - Load Data When Controller Is Instantiated
 	///////////////////////////////////////////////////////////////////////////
-	var promise=ProductFactory.getProductsOnOffer(promotionTypes.SpecialOffer);
-		promise.success(function(response){
+	var promiseSpecial=ProductFactory.getProductsOnOffer(promotionTypes.SpecialOffer);
+		promiseSpecial.success(function(response){
 		$scope.specialOffers=response;
 	});
 	
-	var promise=ProductFactory.getProductsOnOffer(promotionTypes.NewCollection);
-		promise.success(function(response){
+	var promiseNew=ProductFactory.getProductsOnOffer(promotionTypes.NewCollection);
+		promiseNew.success(function(response){
 		$scope.newStock=response;
 	});
 	
