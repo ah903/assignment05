@@ -1,5 +1,6 @@
 var gulp = require("gulp");
 var clean = require("del");
+var jshint = require('gulp-jshint');
 var uglify = require("gulp-uglify");
 var cssmin = require("gulp-cssmin");
 var concat = require("gulp-concat");
@@ -54,7 +55,13 @@ gulp.task("prodcss",["prodclean"],function(){
 
 });
 
-gulp.task("prodjs",["prodclean"],function(){
+gulp.task("prodlint", function() {
+    return gulp.src("src/js/**/*.js")
+    .pipe(jshint())
+    .pipe(jshint.reporter("default"));
+});
+
+gulp.task("prodjs",["prodclean","prodlint"],function(){
 
 	return gulp.src("src/js/**/*.js")
 	.pipe(concat("attire.min.js"))

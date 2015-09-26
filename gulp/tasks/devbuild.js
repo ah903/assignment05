@@ -1,6 +1,8 @@
 var gulp = require("gulp");
 var clean = require("del");
 var inject = require("gulp-inject");
+var jshint = require('gulp-jshint');
+var browsersync = require("browser-sync");
 
 gulp.task("devclean",function(){
 	return clean(["public/**/*"]);
@@ -48,7 +50,13 @@ gulp.task("devcss",["devclean"], function(){
 
 });
 
-gulp.task("devjs",["devclean"], function(){
+gulp.task("devlint", function() {
+    return gulp.src("src/js/**/*.js")
+    .pipe(jshint())
+    .pipe(jshint.reporter("default"));
+});
+
+gulp.task("devjs",["devclean","devlint"], function(){
 
 	return gulp.src("src/js/**/*.js")
 	.pipe(gulp.dest("public/js"));
@@ -72,6 +80,24 @@ gulp.task("devinjectcss",["devcss"], function(){
   		.pipe(inject(cssStream,{ignorePath:"public",addRootSlash: false}))
   		.pipe(gulp.dest("./bin/views"));	
 });
+
+
+gulp.task("watch",function(callback){
+	gulp.watch("src/**/*.html",["devpartials"]);
+	gulp.watch("src/**/*.js",["devattire","devinjectjs"]);
+	gulp.watch("src/css/**/*.css",["devinjectcss"]);
+	callback();
+});
+
+gulp.task("synchronise", function() {
+	return browsersync.init(null, {
+		proxy: "http://localhost:5001",
+        files: ["src/**/*.*"],
+        browser: "google chrome",
+        port: 7000,
+	});
+});
+
 
 gulp.task("devCopyFiles",["devfavicon","devattire","devpartials","devimages","devfonts","devcss","devjs","devinjectjs","devinjectcss"]);
 
