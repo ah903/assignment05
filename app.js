@@ -67,7 +67,7 @@ app.use(cookieParser());
 ////////////////////////////////////////////////////////////////////////////////
 // Statuc Content Server Targetting the Pulic Folder
 ////////////////////////////////////////////////////////////////////////////////
-var distribution=nconf.get("dist");
+var distribution=nconf.get("dist") || "public";
 console.log("Serving From " + distribution);
 app.use(express.static(path.join(__dirname, distribution)));
 

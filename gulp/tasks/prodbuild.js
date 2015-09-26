@@ -1,3 +1,29 @@
+//////////////////////////////////////////////////////////////////
+// Gulp Task prodBuild
+//////////////////////////////////////////////////////////////////
+// Creates a build in the public folder from source code
+// This build is a copy of the source directory but optimised
+// for production delivery
+//////////////////////////////////////////////////////////////////
+// It is possible to change what is served in different ways
+// 
+// 1. Serve from Public Folder 
+// If running locally set config/local.json "dist":"public"
+// This is default for Heroku deployment
+// The content of public may be a copy of development or 
+// optimised for production depending whether the script
+// devbuild or prodbuild has been used to populate public
+//
+// 2. Serve from SRC folder
+// If running locally set config/local.json "dist":"src"
+// Intended to support live reload
+// Default for development
+//////////////////////////////////////////////////////////////////
+// Dependencies : 	gulp       		Gulp Pipleine
+//					del 			Folder management
+//					gulp-inject 	Script injection
+//					gulp-jshint 	Linting Tool
+//////////////////////////////////////////////////////////////////
 var gulp = require("gulp");
 var clean = require("del");
 var jshint = require('gulp-jshint');
@@ -6,10 +32,16 @@ var cssmin = require("gulp-cssmin");
 var concat = require("gulp-concat");
 var inject = require("gulp-inject");
 
+//////////////////////////////////////////////////////////////////
+// Clean The Target Public Folder
+//////////////////////////////////////////////////////////////////
 gulp.task("prodclean", function(){
 	return clean(["public/**/*"]);
 });
 
+//////////////////////////////////////////////////////////////////
+// Copy Favicon after Clean is Completed
+//////////////////////////////////////////////////////////////////
 gulp.task("prodfavicon",["prodclean"], function(){
 
 	return gulp.src("src/favicon.ico")
@@ -17,6 +49,9 @@ gulp.task("prodfavicon",["prodclean"], function(){
 
 });
 
+//////////////////////////////////////////////////////////////////
+// Copy attire-app file after clean is completed
+//////////////////////////////////////////////////////////////////
 gulp.task("prodattire",["prodclean"], function(){
 
 	return gulp.src("src/attire-app.js")
@@ -25,6 +60,9 @@ gulp.task("prodattire",["prodclean"], function(){
 
 });
 
+//////////////////////////////////////////////////////////////////
+// Copy partials file after clean is completed
+//////////////////////////////////////////////////////////////////
 gulp.task("prodpartials",["prodclean"],function(){
 
 	return gulp.src("src/partials/**/*.html")
@@ -32,6 +70,9 @@ gulp.task("prodpartials",["prodclean"],function(){
 
 });
 
+//////////////////////////////////////////////////////////////////
+// Copy images files after clean is completed
+//////////////////////////////////////////////////////////////////
 gulp.task("prodimages",["prodclean"],function(){
 
 	return gulp.src("src/img/**/*.*")
@@ -39,6 +80,9 @@ gulp.task("prodimages",["prodclean"],function(){
 
 });
 
+//////////////////////////////////////////////////////////////////
+// Copy fonts files after clean is completed
+//////////////////////////////////////////////////////////////////
 gulp.task("prodfonts",["prodclean"],function(){
 
 	return gulp.src("src/fonts/**/*.*")
@@ -46,6 +90,9 @@ gulp.task("prodfonts",["prodclean"],function(){
 
 });
 
+//////////////////////////////////////////////////////////////////
+// Copy CSS files through a minification and concat pipeline
+//////////////////////////////////////////////////////////////////
 gulp.task("prodcss",["prodclean"],function(){
 
 	return gulp.src("src/css/**/*.css")
@@ -55,12 +102,18 @@ gulp.task("prodcss",["prodclean"],function(){
 
 });
 
+//////////////////////////////////////////////////////////////////
+// Lint the JS and output the report
+//////////////////////////////////////////////////////////////////
 gulp.task("prodlint", function() {
     return gulp.src("src/js/**/*.js")
     .pipe(jshint())
     .pipe(jshint.reporter("default"));
 });
 
+//////////////////////////////////////////////////////////////////
+// Copy the JS through an uglify pipeline
+//////////////////////////////////////////////////////////////////
 gulp.task("prodjs",["prodclean","prodlint"],function(){
 
 	return gulp.src("src/js/**/*.js")
@@ -70,6 +123,9 @@ gulp.task("prodjs",["prodclean","prodlint"],function(){
 
 });
 
+//////////////////////////////////////////////////////////////////
+// Inject Deevelopment dependencies into Jade Templates
+//////////////////////////////////////////////////////////////////
 gulp.task("prodinjectjs",["prodjs"], function(){
 
 	var jsStream = gulp.src("public/**/*.js",{ignorePath:"public",addRootSlash: false})
@@ -79,6 +135,9 @@ gulp.task("prodinjectjs",["prodjs"], function(){
   		.pipe(gulp.dest("./bin/views"));	
 });
 
+//////////////////////////////////////////////////////////////////
+// Inject CSS dependencies into Jade Templates
+//////////////////////////////////////////////////////////////////
 gulp.task("prodinjectcss",["prodcss"], function(){
 
 	var cssStream = gulp.src("public/**/*.css",{ignorePath:"public",addRootSlash: false})
@@ -88,5 +147,8 @@ gulp.task("prodinjectcss",["prodcss"], function(){
   		.pipe(gulp.dest("./bin/views"));	
 });
 
+//////////////////////////////////////////////////////////////////
+// Production Build Script
+//////////////////////////////////////////////////////////////////
 gulp.task("prodCopyFiles",["prodfavicon","prodattire","prodpartials","prodimages","prodfonts","prodcss","prodjs","prodinjectjs","prodinjectcss"]);
 gulp.task("prodbuild",["prodCopyFiles"]);
