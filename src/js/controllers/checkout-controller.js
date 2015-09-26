@@ -8,8 +8,12 @@
 // Dependencies
 // $scope
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("CheckoutController", ["$scope",function($scope){
-    console.log("Checkout Controller");
-    $scope.greeting="Welcome Andrew Checkout Controller";
-}]);
+angular.module("attire-app").controller("CheckoutController", ["$scope","$rootScope","BasketFactory",function($scope,$rootScope,BasketFactory){
+ 
+	$scope.Basket = BasketFactory.getBasket();
+	$scope.Basket.userId = $rootScope.CurrentUser._id;
+
+
+
+ }]);
 

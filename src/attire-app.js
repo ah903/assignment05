@@ -56,10 +56,6 @@ angular.module("attire-app").run(["$rootScope","$location",function($rootScope,$
 
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
 
-    console.log(next);
-    console.log(current);
-
-
     if(next.requireLogin && !$rootScope.CurrentUser){
       authorisationRedirect= next;    
       $location.url("/login");

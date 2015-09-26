@@ -1,1 +1,86 @@
 <h1>Checkout</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">	
+			<table class="table table-striped">
+				<thead>
+					<td><strong>Item</strong></td>
+					<td><strong>Size</strong></td>
+					<td><strong>Color</strong></td>
+					<td><strong>Quantity</strong></td>				
+					<td><strong>Price</strong></td>
+					<td><strong>Subtotal</strong></td>
+				</thead>
+				<tbody>
+					<tr ng-repeat = "item in Basket.items">
+						<td>{{item.product.title}}</td>
+						<td>{{item.productOptions.sizeOption}}</td>
+						<td>{{item.productOptions.colorOption}}</td>
+						<td>{{item.quantity}}</td>				
+						<td>{{item.price | currency}}</td>
+						<td>{{item.subTotal | currency}}</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>	
+						<td>&nbsp;</td>				
+						<td><strong>{{Basket.total | currency}}</strong></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<h2>Shipping Address</h2>
+			<label for="name">Name <small>(required)</small></label>
+			<input ng-model="CurrentUser.name" type="text" id="name" name="name" placeholder="*Name" class="form-control">
+			<p>
+			<label for="streetname">Street Name <small>(required)</small></label>
+			<input ng-model="CurrentUser.address.streetname" type="text" id="streetname" name="streetname" placeholder="*House Number and Street Name" class="form-control">
+			<p>
+			<label for="town">Town <small>(required)</small></label>
+			<input ng-model="CurrentUser.address.town" type="text" id="town" name="town" placeholder="*Town" class="form-control">
+			<label for="town">City <small>(required)</small></label>
+			<input ng-model="CurrentUser.address.city" type="text" id="city" name="city" placeholder="*City" class="form-control">
+			<label for="postcode">PostCode <small>(required)</small></label>
+			<input ng-model="CurrentUser.address.postcode" type="text" id="postcode" name="postcode" placeholder="*PostCode" class="form-control">
+			<label for="telephone">Telephone <small>(required)</small></label>
+			<input ng-model="CurrentUser.address.telephone" type="text" id="telephone" name="telephone" placeholder="*Telephone" class="form-control">
+			<p>
+		</div>
+
+		<div class="col-sm-6">
+			<h2>Payment Details</h2>
+			<label for="cardType">Card Type<small> (required)</small></label>
+			<select name="cardType" id="cardType" class="form-control">
+				<option value="Amercian Express">American Express</option>
+				<option value="MasterCard">MasterCard</option>
+				<option value="Visa">Visa</option>
+				<option value="Debit Card">Debit Card</option>
+			</select>			
+			<p>
+			<label for="cardNumber">Card Number<small> (required)</small></label>
+			<input ng-model="Basket.order.cardNumber" type="number" id="cardNumber" name="cardNumber" placeholder="*Card Number (XXXX XXXX XXXX XXXX)" class="form-control">
+			<p>
+			<div class="row">
+				<div class="col-sm-6">
+					<label for="cardExpiry">Expiry<small> (required)</small></label>
+					<input ng-model="Basket.order.cardExpiry" type="date" id="cardExpiry" name="cardExpiry" placeholder="*Expiry Date" class="form-control">
+				</div>
+				<div class="col-sm-6">		
+					<label for="cardCV">CCV Number<small> (required)</small></label>
+					<input ng-model="Basket.order.cardCV" type="number" id="cardCV" name="cardCV" placeholder="*CCV Number" class="form-control">
+				</div>
+				<p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<button ng-click="PlaceOrder()" class="btn btn-success btn-lg pull-right">Place Order</button>
+		</div>
+	</div>
+</div>
