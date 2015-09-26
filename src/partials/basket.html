@@ -1,0 +1,61 @@
+<h1>Your Basket</h1>
+<div class="container">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="col-sm-6">
+					<h2>Total {{Basket.count}} Items</h2>
+				</div>
+				<div class="col-sm-6 text-right">
+					<h2>{{Basket.total | currency}}</h2>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<div class="row" ng-repeat="item in Basket.items">
+		<div class="col-sm-3 text-center">
+			<img ng-src="{{item.product.pictures.small}}" alt="{{item.product.title}}">
+		</div>
+		<div class="col-sm-9">
+			<h3>{{item.product.title}}</h3>
+			<p>{{item.product.description}}</p>
+			<div class="row">
+				<div class="col-sm-3">Size:
+					<select ng-model="item.productOptions.sizeOption" ng-change="updateBasket(item)" class="form-control">
+    					<option 
+    						ng-repeat="size in item.product.sizes" 
+    						ng-selected="{{size==item.productOptions.sizeOption}}" value="{{size}}">{{size}}
+    					</option>
+					</select>	
+				</div>
+				<div class="col-sm-3">Color: 
+					<select ng-model="item.productOptions.colorOption" ng-change="updateBasket(item)" class="form-control">
+    					<option 
+    						ng-repeat="color in item.product.colors" 
+    						ng-selected="{{color==item.productOptions.colorOption}}" value="{{color}}">{{color}}
+    					</option>
+					</select>	
+				</div>
+				<div class="col-sm-3">Quantity: 
+					<input type="number" min="1" max="5" class="form-control" ng-model="item.quantity" ng-change="updateBasket(item)"></input>
+				</div>
+				<div class="col-sm-3">SubTotal:
+					<div class="row">
+						<div class="col-sm-6">
+							<p><strong>{{item.subTotal | currency}}</strong></p>
+						</div>
+						<div class="col-sm-6">
+							<button ng-click="removeFromBasket(item)" class="btn btn-default pull-right"><span class="glyphicon glyphicon-trash"></span></button>
+						</div>
+					</div>
+				</div>	
+			</div>	
+		</div>
+		<p>&nbsp;<hr></p>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<a href="/#/checkout" class="btn btn-default pull-right">Checkout</a>	
+		</div>
+	</div>
+</div>

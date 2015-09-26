@@ -7,6 +7,7 @@
 // Required Dependencies 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 var express = require("express");
+//var path = require("path")
 var router = express.Router();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,10 +16,12 @@ var router = express.Router();
 router.get("/", function(req, res, next) {
 
 	console.log("Received GET Root Request");
-	//No Longer Required Will Compile Jade For Distribution
-	//res.render("index", { title: "Express" });
-	res.send("index.html");
+	//console.log(path.join(__dirname, '../../dist/public/index.html'));
+	//res.sendFile(path.join(__dirname, '/../dist/public/index.html'));
+	res.render("index", { title: "Attire" });
 
 });
+
+
 
 module.exports = router;

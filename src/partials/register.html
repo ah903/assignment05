@@ -1,0 +1,43 @@
+<h1>Register</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="alert alert-warning" ng-show="errorMessage">
+				<span class="glyphicon glyphicon-exclamation-sign"></span>{{" " + errorMessage}}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<label for="name">Your Name <small>(required)</small></label>
+			<input ng-model="user.name" type="text" id="name" name="name" placeholder="*Your Name" class="form-control">
+			<label for="username">E-mail address <small>(required)</small></label>
+			<input ng-model="user.username" type="email" id="username" name="username" placeholder="*Your e-mail address" class="form-control">
+			<p>
+			<label for="password">Password <small>(required)</small></label>
+			<input ng-model="user.password" type="password" id="password" name="password" placeholder="*Choose your password" class="form-control">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<label for="streetname">Street Name <small>(required)</small></label>
+			<input ng-model="user.address.streetname" type="text" id="streetname" name="streetname" placeholder="*House Number and Street Name" class="form-control">
+			<p>
+			<label for="town">Town <small>(required)</small></label>
+			<input ng-model="user.address.town" type="text" id="town" name="town" placeholder="*Town" class="form-control">
+			<label for="town">City <small>(required)</small></label>
+			<input ng-model="user.address.city" type="text" id="city" name="city" placeholder="*City" class="form-control">
+			<label for="postcode">PostCode <small>(required)</small></label>
+			<input ng-model="user.address.postcode" type="text" id="postcode" name="postcode" placeholder="*PostCode" class="form-control">
+			<label for="telephone">Telephone <small>(required)</small></label>
+			<input ng-model="user.address.telephone" type="text" id="telephone" name="telephone" placeholder="*Telephone" class="form-control">
+		</div>
+	</div>
+	
+	<div class="row">	
+		<div class="col-sm-6 text-right">
+			<button ng-click="JoinUp()" class="btn btn-default">Join Up</button>
+		</div>
+	</div>
+
+</div>

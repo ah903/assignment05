@@ -1,0 +1,94 @@
+<h1>Product Detail</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+			<img ng-src="{{CurrentProduct.pictures.front}}" alt="{{CurrentProduct.title}}" />
+		</div>
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="col-sm-9">
+					<h3>{{CurrentProduct.title}}</h3>
+				</div>
+				<div class="col-sm-3">
+					<h3>{{CurrentProduct.price}}</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<p>{{CurrentProduct.description}}</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>Choose a Color</h3>
+					<select ng-model="colorOption" class="form-control">
+	    				<option ng-repeat="color in CurrentProduct.colors" ng-selected="{{color==colorOption}}" value="{{color}}">
+	        				{{color}}
+	    				</option>
+					</select>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>Choose your Size</h3>
+					<a href="#"><span class="glyphicon glyphicon-question-sign"/>See our sizing guide</a>
+					<select ng-model="sizeOption" class="form-control">
+	    				<option ng-repeat="size in CurrentProduct.sizes" ng-selected="{{size==sizeOption}}" value="{{size}}">
+	        				{{size}}
+	    				</option>
+					</select>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<p></p>
+					<button ng-click="AddToBasket(CurrentProduct)" class="btn btn-default pull-right">Add To Basket
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<h3>Customer Reviews</h3>
+		<div class="container">
+			<div class="row" ng-repeat="review in CurrentProduct.reviews | orderBy:-review.posted">
+				<div class="col-sm-3">
+					<strong>{{review.reviewer}}</strong>
+					<p>{{review.posted}}</p>
+				</div>
+				<div class="col-sm-7">
+					<strong>{{review.title}}</strong>
+					<p>{{review.body}}</p>
+				</div>
+				<div class="col-sm-2 pull-right">
+					<span class="glyphicon glyphicon-star"></span>
+					<span class="glyphicon glyphicon-star"></span>
+					<span class="glyphicon glyphicon-star"></span>
+					<span class="glyphicon glyphicon-star"></span>
+					<span class="glyphicon glyphicon-star-empty"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<h3>You might also like</h3>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-3" ng-Repeat="item in CurrentProduct.related">
+					<div class="thumbnail">
+      					<img ng-src="{{item.pictures.small}}" alt="{{item.title}}">
+      					<div class="caption text-center">
+      						<h4><strong>{{item.title}}</strong><h4>
+							{{item.description}}
+							<p></p><a href="/#/product/{{item.productId}}" class="btn btn-default">View</a>
+      					</div>
+      				</div>
+    			</div>
+  			</div>
+		</div>
+	</div>	
+  </div>
+</div>
+
