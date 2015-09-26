@@ -92,7 +92,7 @@ gulp.task("watch",function(callback){
 gulp.task("synchronise", function() {
 	return browsersync.init(null, {
 		proxy: "http://localhost:5001",
-        files: ["src/**/*.*"],
+        files: ["src/**/*.*","./bin/views/*.jade"],
         browser: "google chrome",
         port: 7000,
 	});
