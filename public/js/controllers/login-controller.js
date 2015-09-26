@@ -52,6 +52,7 @@ angular.module("attire-app").controller("LoginController", ["$scope","$location"
     ///////////////////////////////////////////////////////////////////////////
     $scope.logout = function(){
         $rootScope.CurrentUser = null;
+        $location.url("/home");
     };
 
 }]);

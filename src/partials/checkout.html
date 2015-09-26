@@ -55,7 +55,7 @@
 		<div class="col-sm-6">
 			<h2>Payment Details</h2>
 			<label for="cardType">Card Type<small> (required)</small></label>
-			<select name="cardType" id="cardType" class="form-control">
+			<select name="cardType" ng-model="payment.cardType" id="cardType" class="form-control">
 				<option value="Amercian Express">American Express</option>
 				<option value="MasterCard">MasterCard</option>
 				<option value="Visa">Visa</option>
@@ -63,16 +63,16 @@
 			</select>			
 			<p>
 			<label for="cardNumber">Card Number<small> (required)</small></label>
-			<input ng-model="Basket.order.cardNumber" type="number" id="cardNumber" name="cardNumber" placeholder="*Card Number (XXXX XXXX XXXX XXXX)" class="form-control">
+			<input ng-model="payment.cardNumber" type="number" id="cardNumber" name="cardNumber" placeholder="*Card Number (XXXX XXXX XXXX XXXX)" class="form-control">
 			<p>
 			<div class="row">
 				<div class="col-sm-6">
 					<label for="cardExpiry">Expiry<small> (required)</small></label>
-					<input ng-model="Basket.order.cardExpiry" type="date" id="cardExpiry" name="cardExpiry" placeholder="*Expiry Date" class="form-control">
+					<input ng-model="payment.cardExpiry" type="date" id="cardExpiry" name="cardExpiry" placeholder="*Expiry Date" class="form-control">
 				</div>
 				<div class="col-sm-6">		
 					<label for="cardCV">CCV Number<small> (required)</small></label>
-					<input ng-model="Basket.order.cardCV" type="number" id="cardCV" name="cardCV" placeholder="*CCV Number" class="form-control">
+					<input ng-model="payment.cardCV" type="number" id="cardCV" name="cardCV" placeholder="*CCV Number" class="form-control">
 				</div>
 				<p>
 			</div>

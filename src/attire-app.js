@@ -41,15 +41,20 @@ angular.module("attire-app").config(["$routeProvider", function($routeProvider) 
       }).
       when("/checkout", {
         templateUrl : "partials/checkout.html",
-        controller  : "CheckoutController",
+        controller  : "OrderController",
         requireLogin:true
       }).
       otherwise({
         redirectTo: "/home"
       });
 
-  }]);
+}]);
 
+///////////////////////////////////////////////////////////////////////////////////////////
+// Angular RouteChange Monitor
+// Used To Test the Validity of certain transitions and if necessary route the
+// transition path thoriugh an authentication step
+///////////////////////////////////////////////////////////////////////////////////////////
 angular.module("attire-app").run(["$rootScope","$location",function($rootScope,$location){
 
   var authorisationRedirect;
