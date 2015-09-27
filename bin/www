@@ -6,12 +6,16 @@
 var app = require("../app");
 var debug = require("debug")("attire:server");
 var http = require("http");
+var nconf=require("nconf");
 
 /////////////////////////////////////////////////////////////////////////////////////
 // Get port from environment and store in Express.
 // Note Heroku Dynamically Allocates the Port
 /////////////////////////////////////////////////////////////////////////////////////
-var portToUse = process.env.PORT || 5000;
+nconf.argv().env().file({ file:"config/config." + process.env.NODE_ENV + ".json"});
+console.log("Using Config config." + process.env.NODE_ENV + ".json");
+
+var portToUse = nconf.get("PORT");
 var port = normalizePort(portToUse);
 console.log("Serving From Port " + port);
 app.set("port", port);

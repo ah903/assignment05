@@ -26,7 +26,9 @@ var app = express();
 ////////////////////////////////////////////////////////////////////////////////
 // Get The Configuration For The Environment and load
 ////////////////////////////////////////////////////////////////////////////////
-nconf.file("config/local.json").env();
+nconf.argv().env().file({ file:"config/config." + process.env.NODE_ENV + ".json"});
+console.log("Using Config config." + process.env.NODE_ENV + ".json");
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // view engine setup using Jade Template Engine
@@ -67,16 +69,16 @@ app.use(cookieParser());
 ////////////////////////////////////////////////////////////////////////////////
 // Statuc Content Server Targetting the Pulic Folder
 ////////////////////////////////////////////////////////////////////////////////
-var distribution=nconf.get("dist") || "public";
-console.log("Serving From " + distribution);
+var distribution=nconf.get("DIST") || "public";
 app.use(express.static(path.join(__dirname, distribution)));
+console.log("Serving Content From Path " + distribution);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Connect to the database
 ////////////////////////////////////////////////////////////////////////////////
 var connectionString=nconf.get("MONGOLAB_URI");
-console.log(connectionString);
 mongoose.connect(connectionString);
+console.log("Database Connection " + connectionString);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global Middleware to handle requests for pagination. Extracts
@@ -102,7 +104,6 @@ app.use("/", routes);
 app.use("/api/products", products);
 app.use("/api/customers", customers);
 app.use("/api/login", customers);
-//app.use("/api/users", users);
 
 ////////////////////////////////////////////////////////////////////////////////
 // catch 404 and forward to error handler
@@ -114,11 +115,13 @@ app.use(function(req, res, next) {
 });
 
 ////////////////////////////////////////////////////////////////////////////////
+// Last Chance Error Handlers
+////////////////////////////////////////////////////////////////////////////////
 // Error handlers for different environments derived from Node ENV parameter
 // Development error handler to print the stacktrace
 // Default Returns Internal Server Error HTTP 500 and shows error page
 ////////////////////////////////////////////////////////////////////////////////
-if (app.get("env") === "development") {
+if (app.get("env") === "DEV") {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render("error", {
