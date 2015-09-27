@@ -10,6 +10,7 @@
 var express = require("express");
 var router = express.Router();
 var customerModel = require("../models/customerModel");
+var orderModel = require("../models/orderModel");
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,5 +120,125 @@ router.get("/", function(req, res, next) {
 		res.status(200).json(data);
   	});
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// API : GET /customer/123456789
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Description
+// Returns a single customer document from the collection queried by the _id
+/////////////////////////////////////////////////////////////////////////////////////////////////
+router.get("/:customerId", function(req, res, next) {
+
+    console.log("Received GET Request Customer By Id " + req.params.customerId);
+    
+    /////////////////////////////////////////////////////////////////
+    // Execute the database query and get the requested custome
+    /////////////////////////////////////////////////////////////////
+    customerModel.findById(req.params.customerId, function(err,data){
+        if(err) next(err); if(!data) next();
+        res.status(200).json(data);
+    })
+
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// API : GET /customer/123456789/orders
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Description
+// Returns the orders placed by a single customer queried by the _id
+/////////////////////////////////////////////////////////////////////////////////////////////////
+router.get("/:customerId/orders", function(req, res, next) {
+
+    console.log("Received GET Request Orders for Customer With Id " + req.params.customerId);
+    
+    /////////////////////////////////////////////////////////////////
+    // Execute the database query and get the requested custome
+    /////////////////////////////////////////////////////////////////
+    var query = {customer: req.params.customerId};
+    orderModel.find(query, function(err,data){
+      if(err) next(err); if(!data) next();
+      res.status(200).json(data);
+    });
+
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// API : GET /customer/123456789/orders
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Description
+// Returns the orders placed by a single customer queried by the _id
+/////////////////////////////////////////////////////////////////////////////////////////////////
+router.post("/:customerId/orders", function(req, res, next) {
+
+    console.log("Received POST Request New Order for Customer With Id " + req.params.customerId);
+    
+    /////////////////////////////////////////////////////////////////
+    // Execute the database query and get the requested custome
+    /////////////////////////////////////////////////////////////////
+    var basket = req.body;
+    
+    var newOrder = new orderModel();
+    newOrder.customer = basket.user._id;
+    newOrder.ordercount = basket.count;
+    newOrder.ordertotal = basket.total;
+    newOrder.orderitems = parseProducts(basket);
+    newOrder.payment = parsePayment(basket);
+    newOrder.billingaddr = parseAddress(basket.user); 
+    newOrder.shippingaddr = parseAddress(basket.user);
+    newOrder.delivery = parseDelivery(basket);
+
+    /////////////////////////////////////////////////////////////////
+    // Save the Review and Return 201 Code If Successful
+    /////////////////////////////////////////////////////////////////
+    newOrder.save(function(err, data){
+      if(err) next(err);
+      if(!data) next();
+      res.status(201).json(data);       
+   });
+    
+});
+
+function parseProducts(basket){
+
+  var orderedProducts = [];
+  for(var i=0; i < basket.items.length; i++){
+      var orderItem = {};
+      orderItem.productId = basket.items[i].product._id;
+      orderItem.price = basket.items[i].price;
+      orderItem.quantity = basket.items[i].quantity;
+      orderItem.subtotal = basket.items[i].subTotal;
+      orderItem.size = basket.items[i].productOptions.sizeOption;
+      orderItem.color = basket.items[i].productOptions.colorOption;
+      orderedProducts.push(orderItem);
+  }
+  return orderedProducts;
+
+}
+
+function parsePayment(basket){
+
+    var transaction = {};
+    transaction.cardtype = basket.payment.cardType;
+    transaction.cardnumber = basket.payment.cardNumber;
+    transaction.expirydate = basket.payment.cardExpiry;
+    transaction.cardCV = basket.payment.cardCV;  
+    return transaction;  
+}
+
+function parseDelivery(basket){
+
+    var delivery = {};
+    delivery.deliveryType="Standard";
+    delivery.shippingdate=Date.now()+5*24*60*60*1000;
+    return delivery;
+}
+
+function parseAddress(customer){
+
+    var address=customer.address;
+    return address;
+}
+
+
 
 module.exports = router;

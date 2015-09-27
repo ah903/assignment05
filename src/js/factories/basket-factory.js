@@ -19,7 +19,6 @@ angular.module("attire-app").factory("BasketFactory",function(){
 	// Local Variables
 	//////////////////////////////////////////////////////////////////////
 	var basket={
-		userId:"",
 		total:0.00,
 		count:0,
 		items:[]

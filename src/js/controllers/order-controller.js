@@ -12,7 +12,7 @@
 angular.module("attire-app").controller("OrderController", ["$scope","$rootScope","BasketFactory","OrderFactory",function($scope,$rootScope,BasketFactory,OrderFactory){
 
 	$scope.Basket = BasketFactory.getBasket();
-	$scope.Basket.userId = $rootScope.CurrentUser._id;
+	$scope.Basket.user = $rootScope.CurrentUser;
 	
 	$scope.PlaceOrder = function(){
 		console.log("Place Order");

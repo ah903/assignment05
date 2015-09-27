@@ -24,13 +24,14 @@ var orderSchema = new mongoose.Schema({
 			productId	: {type: String, required : true},
 			price		: {type: Number, required : true, default:0, min:0},
 			quantity	: {type: Number, required : true, default:0, min:0},
-			subtotal	: {type: Number, required : true, default:0, min:0}	
+			subtotal	: {type: Number, required : true, default:0, min:0},
+			size		: {type: String, required : true},
+			color		: {type: String, required : true}	
 		}
 	],		
 	delivery 	:
 	{
-		deliverytype	: {type: String, enum: ["Collect", "Standard", "Express"]},
-		deliverycode	: {type: Number, required : true, default:0, min:0},
+		deliverytype	: {type: String, enum: ["Collect", "Standard", "Express"], default:"Standard"},
 		shippingdate	: {type: Date, required : true, default: Date.now()+5*24*60*60*1000},	
 	},
 	billingaddr	: 
@@ -48,6 +49,12 @@ var orderSchema = new mongoose.Schema({
 		city		: {type: String, required : true},
 		postcode 	: {type: String, required : true},
 		telephone 	: {type: String}
+	},
+	payment:{
+		cardtype 	: {type: String, required : true}, 
+		cardnumber 	: {type: String, required : true},
+		expirydate	: {type: Date, required : true},
+		cardCV 		: {type: String, required : true}
 	}
 
 }, {collection:"orders"});
