@@ -16,8 +16,11 @@ var nconf = require("nconf");
 ////////////////////////////////////////////////////////////////////////////////
 // Get The Configuration For The Environment and load
 ////////////////////////////////////////////////////////////////////////////////
-nconf.file("config/local.json").env();
-var watchFolder=nconf.get("dist") || "src";
+nconf.argv().env().file({ file:"config/config." + (process.env.NODE_ENV || "DEV") + ".json"});
+console.log("Using Config config." + (process.env.NODE_ENV || "DEV") + ".json");
+
+var portToProxy = nconf.get("PORT");
+var watchFolder=nconf.get("DIST") || "src";
 
 //////////////////////////////////////////////////////////////////
 // Set up browser synchronisation on the source folder
@@ -27,7 +30,7 @@ var watchFolder=nconf.get("dist") || "src";
 //////////////////////////////////////////////////////////////////
 gulp.task("synchronise", function() {
 	return browsersync.init(null, {
-		proxy: "http://localhost:5001",
+		proxy: "http://localhost:" + portToProxy,
         files: [watchFolder + "/**/*.*","./bin/views/*.jade"],
         browser: "google chrome",
         port: 7000,

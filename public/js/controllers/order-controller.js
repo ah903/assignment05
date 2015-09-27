@@ -9,7 +9,7 @@
 // Dependencies
 // $scope
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("OrderController", ["$scope","$rootScope","$location","BasketFactory","OrderFactory",function($scope,$rootScope,$location,BasketFactory,OrderFactory){
+angular.module("attire-app").controller("OrderController", ["$scope","$rootScope","BasketFactory","OrderFactory",function($scope,$rootScope,BasketFactory,OrderFactory){
 
 	$scope.Basket = BasketFactory.getBasket();
 	$scope.Basket.user = $rootScope.CurrentUser;
@@ -17,15 +17,7 @@ angular.module("attire-app").controller("OrderController", ["$scope","$rootScope
 	$scope.PlaceOrder = function(){
 		console.log("Place Order");
 		$scope.Basket.payment = $scope.payment;
-		OrderFactory.placeOrder($scope.Basket,function(response){
-			if(response._id){
-				BasketFactory.emptyBasket();
-				$scope.Basket = BasketFactory.getBasket();
-				$rootScope.$broadcast("OnBasketChanged",$scope.Basket);
-				$rootScope.Order=response;
-				$location.url("/confirmation");
-			}
-		});
+		OrderFactory.placeOrder($scope.Basket);
 	};
 
 }]);

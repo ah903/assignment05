@@ -1,0 +1,87 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Customer Factory 
+// Singleton Factory Responsible for managing connection to backend database
+// Follows a pattern of using $http object to connect to an API endpoint
+// and post processing the promise with the .then construct to make it simpler
+// for consuming controllers
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// This pattern is also useful to hide physical data storage implementations
+// from controllers so a controller may make a single call to the factory and
+// not need to know that the factory may chain multiple promises to assemble
+// the data requested
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Dependencies
+// $http injected in
+///////////////////////////////////////////////////////////////////////////////////////////////////
+angular.module("attire-app").factory("CustomerFactory",["$http", function($http){
+
+	////////////////////////////////////////////////////////////////////////
+	// Factory Configuration 
+	////////////////////////////////////////////////////////////////////////
+	var serviceEndPoints = {
+		LoginEndPoint : "/api/customers/login",
+		RegisterEndPoint : "/api/customers/register"
+	};
+
+	/////////////////////////////////////////////////////////////////////////
+	// Function loginUser
+	/////////////////////////////////////////////////////////////////////////
+	// Passes the user credentials to the server for authentication
+	// Waits for the Promise and returns the response to the caller
+	// so the caller is unaware of the server side interface
+	/////////////////////////////////////////////////////////////////////////
+	// Returns customer object	
+	/////////////////////////////////////////////////////////////////////////
+	var loginUser = function(user, callback){	
+		$http.post(serviceEndPoints.LoginEndPoint,user)
+		.success(function(response){
+			callback(response);
+		});
+
+	};
+
+	/////////////////////////////////////////////////////////////////////////
+	// Function registerUser
+	/////////////////////////////////////////////////////////////////////////
+	// Passes the user details to the server for storage. Expects the 
+	// User object to be a new object not an existing one
+	// Waits for the Promise and returns the response to the caller
+	// so the caller is unaware of the server side interface
+	/////////////////////////////////////////////////////////////////////////
+	// Returns customer object	
+	/////////////////////////////////////////////////////////////////////////
+	var registerUser = function(user,callback){
+		$http.post(serviceEndPoints.RegisterEndPoint,user)
+		.success(function(response){
+			callback(response);
+		});
+	};
+
+	/////////////////////////////////////////////////////////////////////////
+	// Function registerUser
+	/////////////////////////////////////////////////////////////////////////
+	// Passes the user details to the server for storage. Expects the 
+	// User object to be a new object not an existing one
+	// Waits for the Promise and returns the response to the caller
+	// so the caller is unaware of the server side interface
+	/////////////////////////////////////////////////////////////////////////
+	// Returns customer object	
+	/////////////////////////////////////////////////////////////////////////
+	var updateUser = function(user,callback){
+		$http.put(serviceEndPoints.RegisterEndPoint,user)
+		.success(function(response){
+			callback(response);
+		});
+	};
+
+	/////////////////////////////////////////////////////////////////////////
+	// Public Interface to the Factory Exposed as an Object literal
+	// Set of pointers to private functions
+	/////////////////////////////////////////////////////////////////////////
+	return{
+		loginUser:loginUser,
+		registerUser:registerUser,
+		updateUser:updateUser
+	};
+
+}]);

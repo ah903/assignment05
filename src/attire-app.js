@@ -44,6 +44,11 @@ angular.module("attire-app").config(["$routeProvider", function($routeProvider) 
         controller  : "OrderController",
         requireLogin:true
       }).
+      when("/confirmation", {
+        templateUrl : "partials/confirm.html",
+        controller  : "ConfirmationController",
+        requireLogin:true
+      }).
       otherwise({
         redirectTo: "/home"
       });

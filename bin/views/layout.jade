@@ -6,7 +6,7 @@ html(lang="en")
     meta( name='viewport', content='width=device-width, initial-scale=1.0' )
     link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
     //- inject:css
-    link(rel="stylesheet", href="css/attire.min.css")
+    link(rel="stylesheet", href="css/attire.css")
     //- endinject
 
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
@@ -15,7 +15,18 @@ html(lang="en")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.min.js")
     //- inject:js
     script(src="attire-app.js")
-    script(src="js/attire.min.js")
+    script(src="js/controllers/basket-controller.js")
+    script(src="js/controllers/detail-controller.js")
+    script(src="js/controllers/home-controller.js")
+    script(src="js/controllers/login-controller.js")
+    script(src="js/controllers/order-controller.js")
+    script(src="js/controllers/product-controller.js")
+    script(src="js/controllers/register-controller.js")
+    script(src="js/factories/basket-factory.js")
+    script(src="js/factories/customer-factory.js")
+    script(src="js/factories/order-factory.js")
+    script(src="js/factories/product-factory.js")
+    script(src="js/services/basket-events.js")
     //- endinject
 
 
