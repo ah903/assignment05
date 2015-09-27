@@ -70,21 +70,27 @@ router.get("/:productId", function(req, res, next) {
     // method with a productId path as an alternative implementation 
   	/////////////////////////////////////////////////////////////////
   	productModel.findOne({productId:req.params.productId},function(err,data){      
-      if(err) next(err); if(!data) next();
-      if(data.related.length > 0) {
-        console.log("Loading Related Data");
-        productModel.find({productId:{$in:data.related}}).exec(function(err,related){
-          data.related=related;
-          res.status(200).json(data);
-        })
+      if(err) next(err); 
+      
+      if(data){
+        if(data.related.length > 0) {
+          console.log("Loading Related Data");
+          productModel.find({productId:{$in:data.related}}).exec(function(err,related){
+            data.related=related;
+            res.status(200).json(data);
+          })
+        }
+        else{
+          console.log("Running Suggestions for " + data.brand + " and " + data.group);
+          productModel.find({brand:data.brand,group:data.group}).limit(4).exec(function(err,suggested){
+            data.related=suggested;
+            res.status(200).json(data);
+          }) 
+        }
       }
       else{
-        console.log("Running Suggestions for " + data.brand + " and " + data.group);
-        productModel.find({brand:data.brand,group:data.group}).limit(4).exec(function(err,suggested){
-          data.related=suggested;
-          res.status(200).json(data);
-        }) 
-      }
+        res.status(200).json({});
+      } 
   	});
 });
 
