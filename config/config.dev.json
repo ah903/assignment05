@@ -1,0 +1,10 @@
+{
+	"PORT":3000,
+	"DIST":"src",
+	"DATABASE":"attire-db0-dev",
+	"CONNECTION":"ds041563.mongolab.com:41563",
+	"DBPORT":"41563",
+	"MONGOLAB_URI":"mongodb://attire:att1r3@ds041563.mongolab.com:41563/attire-db0-dev",
+	"CLEANIMPORT":"mongoimport --jsonArray --host ds041563.mongolab.com --port 41563 --db attire-db0-dev --drop",
+	"DIRTYIMPORT":"mongoimport --jsonArray --host ds041563.mongolab.com --port 41563 --db attire-db0-dev"
+}

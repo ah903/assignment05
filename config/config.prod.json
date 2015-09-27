@@ -1,0 +1,10 @@
+{
+	"PORT":3000,
+	"DIST":"public",
+	"DATABASE":"heroku_hl48jg51",
+	"CONNECTION":"ds051873.mongolab.com:51873",
+	"DBPORT":"51873",
+	"MONGOLAB_URI":"mongodb://heroku_hl48jg51:in2p1luejfvpv4813qf6g9uknm@ds051873.mongolab.com:51873/heroku_hl48jg51",
+	"CLEANIMPORT":"mongoimport --jsonArray --host ds051873.mongolab.com --port 51873 --db heroku_hl48jg51 -u 'att1re' -p 'att1re' --drop",
+	"DIRTYIMPORT":"mongoimport --jsonArray --host ds051873.mongolab.com --port 51873 --db heroku_hl48jg51 -u 'att1re' -p 'att1re'"
+}

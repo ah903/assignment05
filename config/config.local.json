@@ -1,0 +1,11 @@
+{
+	"PORT":3000,
+	"DIST":"src",
+	"DATABASE":"attire-db0-dev",
+	"CONNECTION":"127.0.0.1:27017",
+	"DBPORT":"27017",
+	"MONGOLAB_URI":"mongodb://localhost:27017/attire-db0-dev",
+	"CLEANIMPORT":"mongoimport --jsonArray --host 127.0.0.1 --port 27017 --db attire-db0-dev --drop",
+	"DIRTYIMPORT":"mongoimport --jsonArray --host 127.0.0.1 --port 27017 --db attire-db0-dev"
+}
+
