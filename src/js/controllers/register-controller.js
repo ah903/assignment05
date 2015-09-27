@@ -8,12 +8,13 @@
 // Dependencies
 // $scope
 ///////////////////////////////////////////////////////////////////////////////////////////
-angular.module("attire-app").controller("RegisterController", ["$scope","$location","CustomerFactory",function($scope,$location,CustomerFactory){
+angular.module("attire-app").controller("RegisterController", ["$scope","$rootScope","$location","CustomerFactory",function($scope,$rootScope,$location,CustomerFactory){
 
 	$scope.JoinUp = function(){
 		var newUser = $scope.user;
 		CustomerFactory.registerUser(newUser, function(response){
 			if(response){
+				$rootScope.CurrentUser = response;
 				$location.path("/home");		
 			}
 			else{
