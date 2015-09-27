@@ -18,7 +18,7 @@ angular.module("attire-app").controller("OrderController", ["$scope","$rootScope
 		console.log("Place Order");
 		$scope.Basket.payment = $scope.payment;
 		OrderFactory.placeOrder($scope.Basket,function(response){
-			if(response._id){
+			if(response.orderstatus === "Order Placed"){
 				BasketFactory.emptyBasket();
 				$scope.Basket = BasketFactory.getBasket();
 				$rootScope.$broadcast("OnBasketChanged",$scope.Basket);

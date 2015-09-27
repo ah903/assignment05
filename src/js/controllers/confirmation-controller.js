@@ -13,7 +13,7 @@ angular.module("attire-app").controller("ConfirmationController", ["$scope","$ro
 	///////////////////////////////////////////////////////////////////////////
 	// Initial View - Load Data When Controller Is Instantiated
 	///////////////////////////////////////////////////////////////////////////
-	//TO DO	
+	console.log("Confirmation Controller");	
 
 
 }]);
