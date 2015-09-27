@@ -2,7 +2,7 @@
 /data
 
 #public
-/public
+#/public
 
 # Logs
 logs
