@@ -1,6 +1,9 @@
 #database
 /data
 
+#public
+/public
+
 # Logs
 logs
 *.log
