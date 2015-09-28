@@ -10,6 +10,10 @@ a fictional clothing store called Attire
 	Node can be installed from https://nodejs.org/en/
 	Install Node before continuing
 
+	This application requires Gulp to be installed globally
+	Gulp can be installed using node package manager. At a command prompt type:
+	npm install gulp -g
+
 
 2. Downloading the Source Code
 	Clone this repository to a local folder called attire

@@ -2,7 +2,7 @@
 /data
 
 #public
-#/public
+/public
 
 # Logs
 logs
@@ -36,4 +36,4 @@ node_modules
 npm-debug.log
 
 # Server Config
-#config/*.json
+config/*.json
