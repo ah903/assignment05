@@ -80,6 +80,7 @@
 					<div class="thumbnail">
       					<a href="/#/product/{{item.productId}}"><img ng-src="{{item.pictures.small}}" alt="{{item.title}}"></a>
       					<div class="caption text-center">
+      						<h3>{{item.price | currency}}</h3>
       						<h4><strong>{{item.title}}</strong><h4>
 							{{item.description}}
 							<p></p><a href="/#/product/{{item.productId}}" class="btn btn-default">View</a>

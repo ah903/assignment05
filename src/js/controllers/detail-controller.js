@@ -11,6 +11,9 @@
 
 angular.module("attire-app").controller("DetailController", ["$scope","$routeParams","$rootScope","ProductFactory","BasketFactory",function($scope,$routeParams,$rootScope,ProductFactory,BasketFactory){
 
+	var MAX_RATING=5;
+	$scope.ratingRange = new Array(MAX_RATING);
+
 	///////////////////////////////////////////////////////////////////////////
 	// Initial View - Load Data When Controller Is Instantiated
 	///////////////////////////////////////////////////////////////////////////
