@@ -8,7 +8,7 @@ reviews = "reviews"
 customers="customers"
 
 # Change Working Directory From Root
-cd "../generation-01-data"
+cd "../generated-data"
 
 # Clean Up Any Old Files
 rm product-100-out.json
