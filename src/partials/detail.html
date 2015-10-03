@@ -62,11 +62,8 @@
 					<p>{{review.body}}</p>
 				</div>
 				<div class="col-sm-2 pull-right">
-					<span class="glyphicon glyphicon-star"></span>
-					<span class="glyphicon glyphicon-star"></span>
-					<span class="glyphicon glyphicon-star"></span>
-					<span class="glyphicon glyphicon-star"></span>
-					<span class="glyphicon glyphicon-star-empty"></span>
+					<span class="glyphicon glyphicon-star" ng-repeat="i in ratingRange.slice(0,review.rating) track by $index"/>
+					<span class="glyphicon glyphicon-star-empty" ng-repeat="i in ratingRange.slice(review.rating) track by $index"/>
 				</div>
 			</div>
 		</div>
