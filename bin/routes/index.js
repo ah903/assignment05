@@ -16,8 +16,6 @@ var router = express.Router();
 router.get("/", function(req, res, next) {
 
 	console.log("Received GET Root Request");
-	//console.log(path.join(__dirname, '../../dist/public/index.html'));
-	//res.sendFile(path.join(__dirname, '/../dist/public/index.html'));
 	res.render("index", { title: "Attire" });
 
 });

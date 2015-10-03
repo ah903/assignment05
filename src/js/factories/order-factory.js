@@ -8,7 +8,6 @@ angular.module("attire-app").factory("OrderFactory",["$http", function($http){
 	};
 
 	var placeOrder = function(order, callback){
-		console.log("Place Order Factory");
 		var endPoint=serviceEndPoints.CustomerEndPoint + order.user._Id + "/orders";
 		$http.post(endPoint,order)
 		.success(function(response){
@@ -16,7 +15,16 @@ angular.module("attire-app").factory("OrderFactory",["$http", function($http){
 		});
 	};
 
+	var getOrdersForUser = function(user, callback){
+		var endPoint=serviceEndPoints.CustomerEndPoint + user._id + "/orders";
+		$http.get(endPoint)
+		.success(function(response){
+			callback(response);
+		});
+	}
+
 	return{
+		getOrdersForUser: getOrdersForUser,
 		placeOrder:placeOrder
 	};
 

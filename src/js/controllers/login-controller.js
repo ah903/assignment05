@@ -33,7 +33,7 @@ angular.module("attire-app").controller("LoginController", ["$scope","$location"
             if(response){
                 $scope.loginError="";
                 $rootScope.CurrentUser = response;
-                $location.url("/home");
+                $location.url("/account");
             }
             else{
                 $scope.errorMessage=ErrorMessages.ErrorAuthenticationMessage;

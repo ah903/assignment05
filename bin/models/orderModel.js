@@ -15,13 +15,14 @@ var mongoose = require("mongoose");
 /////////////////////////////////////////////////////////////////////////////////////////////////
 var orderSchema = new mongoose.Schema({
 	customer 	: {type : mongoose.Schema.ObjectId, ref:"Customer"},
+	orderdate   : {type : String, default : Date.now, index:true},
 	ordercount	: {type: Number, required : true, default:0, min:0},
 	ordertotal	: {type: Number, required : true, default:0, min:0},
 	orderstatus	: {type: String, required : true, default: "Order Placed"},
 	orderitems	: 
 	[
 		{
-			productId	: {type: String, required : true},
+			productId	: {type : mongoose.Schema.ObjectId, ref:"Product"},
 			price		: {type: Number, required : true, default:0, min:0},
 			quantity	: {type: Number, required : true, default:0, min:0},
 			subtotal	: {type: Number, required : true, default:0, min:0},

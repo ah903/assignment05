@@ -155,10 +155,15 @@ router.get("/:customerId/orders", function(req, res, next) {
     // Execute the database query and get the requested custome
     /////////////////////////////////////////////////////////////////
     var query = {customer: req.params.customerId};
-    orderModel.find(query, function(err,data){
+    orderModel.find(query).populate("orderitems.productId").exec(function(err,data){
       if(err) next(err); if(!data) next();
       res.status(200).json(data);
     });
+
+    //orderModel.find(query, function(err,data){
+    //  if(err) next(err); if(!data) next();
+    //  res.status(200).json(data);
+    //});
 
 });
 
