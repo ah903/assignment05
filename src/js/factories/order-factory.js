@@ -21,7 +21,7 @@ angular.module("attire-app").factory("OrderFactory",["$http", function($http){
 		.success(function(response){
 			callback(response);
 		});
-	}
+	};
 
 	return{
 		getOrdersForUser: getOrdersForUser,

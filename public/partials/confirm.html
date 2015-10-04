@@ -1,9 +1,10 @@
 <h1>Thank you for your Order</h1>
 <div class="container">
 	<h2>Order Details</h2>
-	<p>Order number : {{Order._id}}</p>
-	<p>Status 		: {{Order.orderstatus}}</p>
-	<p>Value		: {{Order.ordertotal | currency}}</p>
+	<p>Order number  : {{Order._id}}</p>
+	<p>Status 		 : {{Order.orderstatus}}</p>
+	<p>Shipping Date : {{Order.delivery.shippingdate | date}} </p>
+	<p>Value		 : {{Order.ordertotal | currency}}</p>
 	<h2>Shipment Details</h2>
 	<p>{{Order.shippingaddr.streetname}}</p>
 	<p>{{Order.shippingaddr.town}}</p>

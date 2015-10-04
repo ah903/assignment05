@@ -62,11 +62,8 @@
 					<p>{{review.body}}</p>
 				</div>
 				<div class="col-sm-2 pull-right">
-					<span class="glyphicon glyphicon-star"></span>
-					<span class="glyphicon glyphicon-star"></span>
-					<span class="glyphicon glyphicon-star"></span>
-					<span class="glyphicon glyphicon-star"></span>
-					<span class="glyphicon glyphicon-star-empty"></span>
+					<span class="glyphicon glyphicon-star" ng-repeat="i in ratingRange.slice(0,review.rating) track by $index"/>
+					<span class="glyphicon glyphicon-star-empty" ng-repeat="i in ratingRange.slice(review.rating) track by $index"/>
 				</div>
 			</div>
 		</div>
@@ -80,7 +77,7 @@
 					<div class="thumbnail">
       					<a href="/#/product/{{item.productId}}"><img ng-src="{{item.pictures.small}}" alt="{{item.title}}"></a>
       					<div class="caption text-center">
-      						<h3>{{item.price | currency}}</h3>
+      						<h3>{{item.price}}</h3>
       						<h4><strong>{{item.title}}</strong><h4>
 							{{item.description}}
 							<p></p><a href="/#/product/{{item.productId}}" class="btn btn-default">View</a>
