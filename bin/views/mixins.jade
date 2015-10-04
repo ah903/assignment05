@@ -21,9 +21,9 @@ mixin navbar(name, href, id, style)
                 block
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Dropdown
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 mixin navbar_dropdown(href, controller, active)
-    li(class=["dropdown", active])
+    li(class=["dropdown", active])&attributes(attributes)
         a.dropdown-toggle(href=href, data-toggle="dropdown", role="button", aria-expanded="false")=attributes.label
             span.caret
         ul.dropdown-menu( role="menu" )
@@ -36,13 +36,6 @@ mixin navbar_item(href)
     li&attributes(attributes): a( href=href )
         block
 
-//mixin navbar_item(href, active,controller)
-//    li(class=active)&attributes({"ng-controller":controller}): a( href=href )
-//        block
-
-//mixin navbar_item(href, active)
-//    li(class=active): a( href=href )
-//        block
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Menu Divider
