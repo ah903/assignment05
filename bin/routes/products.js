@@ -44,8 +44,8 @@ router.get("/", function(req, res, next) {
     if(req.query.promotion) query.promotion=req.query.promotion; 
     
   	productModel.find(query).limit(options.size).skip(options.skip).exec(function(err, data){
-        if(err) next(err);
-        if(!data) next();
+        if(err) return next(err);
+        if(!data) return next();
         res.status(200).json(data);
     });
 
@@ -69,29 +69,27 @@ router.get("/:productId", function(req, res, next) {
     // how test data was generated. May be able top use the populate
     // method with a productId path as an alternative implementation 
   	/////////////////////////////////////////////////////////////////
-  	productModel.findOne({productId:req.params.productId},function(err,data){      
-      if(err) next(err); 
-      
-      if(data){
-        if(data.related.length > 0) {
-          console.log("Loading Related Data");
-          productModel.find({productId:{$in:data.related}}).exec(function(err,related){
-            data.related=related;
-            res.status(200).json(data);
-          })
-        }
-        else{
-          console.log("Running Suggestions for " + data.brand + " and " + data.group);
-          productModel.find({brand:data.brand,group:data.group}).limit(4).exec(function(err,suggested){
-            data.related=suggested;
-            res.status(200).json(data);
-          }) 
-        }
-      }
-      else{
-        res.status(200).json({});
+    productModel.findOne({productId:req.params.productId},function(err,data){  
+      if(err) return next(err);
+      if(!data) return next();
+
+      if(data.related.length > 0){
+        console.log("Loading Related Data");
+        productModel.find({productId:{$in:data.related}}).exec(function(err,related){
+          data.related=related;
+          return res.status(200).json(data);
+        });
       } 
-  	});
+      else{
+        console.log("Running Suggestions for " + data.brand + " and " + data.group);
+        productModel.find({brand:data.brand,group:data.group}).limit(4).exec(function(err,suggested){
+          data.related=suggested;
+          return res.status(200).json(data);
+        });
+      }
+
+    });  	
+
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,8 +117,8 @@ router.get("/:productId/reviews", function(req, res, next) {
   	// Execute the database query and return a 200 if successful
   	/////////////////////////////////////////////////////////////////
   	reviewModel.find(query).limit(options.size).skip(options.skip).sort({posted:1}).exec(function(err, data){
-  		if(err) next(err);
-  		if(!data) next();
+  		if(err) return next(err);
+  		if(!data) return next();
   		res.status(200).json(data);		
   	});
 });
@@ -148,8 +146,8 @@ router.get("/:productId/reviews/:reviewId", function(req, res, next) {
   	// Execute the database query and return a 200 if successful
   	/////////////////////////////////////////////////////////////////
   	reviewModel.findById(req.params.reviewId, function(err, data){
-        if(err) next(err); 
-  	    if(!data) next();
+        if(err) return next(err); 
+  	    if(!data) return next();
   		  res.status(200).json(data);		
   	});
 });
@@ -178,8 +176,8 @@ router.post("/:productId/reviews", function(req, res, next) {
     // Save the Review and Return 201 Code If Successful
     /////////////////////////////////////////////////////////////////
     newReview.save(function(err, data){
-		  if(err) next(err);
-		  if(!data) next();
+		  if(err) return next(err);
+		  if(!data) return next();
 		  res.status(201).json(data);				
 	 });
 
@@ -200,11 +198,11 @@ router.delete("/:productId/reviews/:reviewId", function(req, res, next) {
   	query._id=req.params.reviewId;
 
   	/////////////////////////////////////////////////////////////////
-	// Delete the Review and Return 204 Code If Successful
-	/////////////////////////////////////////////////////////////////
+	  // Delete the Review and Return 204 Code If Successful
+	  /////////////////////////////////////////////////////////////////
   	reviewModel.remove(query,function(err, data){
-  		if(err) next(err);
-		res.status(204).send();	
+  		if(err) return next(err);
+		  res.status(204).send();	
   	});
 });
 

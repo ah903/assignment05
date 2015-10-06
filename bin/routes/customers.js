@@ -22,7 +22,7 @@ var orderModel = require("../models/orderModel");
 // If no match is found an error is generated
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Returns HTTP 201 Success
-//         HTTP 404 Resource Not Found
+//         HTTP 404 Customer Not Found
 /////////////////////////////////////////////////////////////////////////////////////////////////
 router.post("/login", function(req, res, next) {
 
@@ -32,7 +32,7 @@ router.post("/login", function(req, res, next) {
     var passwordFromBody = req.body.password;
 
     customerModel.findOne({username:usernameFromBody,password:passwordFromBody},function(err,data){
-      if(err) return res.status(404).json(err);
+      if(err) return next(err);
       res.status(200).json(data);
     });
 });
@@ -44,7 +44,7 @@ router.post("/login", function(req, res, next) {
 // Registers a new user as a customer of the system and allocates an object Id
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Returns HTTP 201 Success
-//         HTTP 404 Resource Not Found
+//         HTTP 500 Error Inserting Data
 /////////////////////////////////////////////////////////////////////////////////////////////////
 router.post("/register", function(req, res, next){
 
@@ -62,7 +62,7 @@ router.post("/register", function(req, res, next){
     registeredUser.address.telephone = req.body.address.telephone || "";
 
     registeredUser.save(function(err, data){
-      if(err) return res.status(404).json(err);
+      if(err) return next(err);
       res.status(201).json(data);
     }); 
 
@@ -73,10 +73,10 @@ router.post("/register", function(req, res, next){
 // API : PUT customers/register
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Description
-// Updates an existing customer registration 
+// Updates an existing customer registration or inserts if not found
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Returns HTTP 201 Success
-//         HTTP 404 Resource Not Found
+//         HTTP 500 Error
 /////////////////////////////////////////////////////////////////////////////////////////////////
 router.put("/register", function(req, res, next){
 
@@ -87,7 +87,7 @@ router.put("/register", function(req, res, next){
     var options = {upsert:true, new:true};
 
     customerModel.findOneAndUpdate(query,registeredUser,options, function(err,data){
-      if(err) return res.status(404).json(err);
+      if(err) return next(err);
       res.status(201).json(data);
     });
 });
@@ -101,25 +101,25 @@ router.put("/register", function(req, res, next){
 // category : Name of the Product Category
 // TO DO    : Sort Order limits and Pagination
 /////////////////////////////////////////////////////////////////////////////////////////////////
-router.get("/", function(req, res, next) {
-
-  	console.log("Received GET Request All Customers");
-
- 	/////////////////////////////////////////////////////////////////
- 	// Create a Search Query
-  	// Note this could potentially done in the pipeline with app
-  	// params if we need to achieve reusable support for these
-  	// filters
-  	/////////////////////////////////////////////////////////////////
-  	var query={};
-  	
-  	// Execute the database query and return a 200 if successful
-  	customerModel.find(query,function(err,data){
-  		if(err) next(err);
-  		if(!data) next();
-		res.status(200).json(data);
-  	});
-});
+//router.get("/", function(req, res, next) {
+//
+// 	console.log("Received GET Request All Customers");
+//
+// 	/////////////////////////////////////////////////////////////////
+// 	// Create a Search Query
+//  	// Note this could potentially done in the pipeline with app
+//  	// params if we need to achieve reusable support for these
+//  	// filters
+//  	/////////////////////////////////////////////////////////////////
+//  	var query={};
+//  	
+//  	// Execute the database query and return a 200 if successful
+//  	customerModel.find(query,function(err,data){
+//  		if(err) next(err);
+//  		if(!data) next();
+//		res.status(200).json(data);
+//  	});
+//});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // API : GET /customer/123456789
@@ -132,10 +132,19 @@ router.get("/:customerId", function(req, res, next) {
     console.log("Received GET Request Customer By Id " + req.params.customerId);
     
     /////////////////////////////////////////////////////////////////
+    // TO DO API should only return customer data when there is
+    // an active authenticated user session and that user session
+    // is requesting data with the same identifier so customers
+    // can see their own data but not other customer data
+    /////////////////////////////////////////////////////////////////
+    // TO DO - Future Release Additional Authentication    
+
+    /////////////////////////////////////////////////////////////////
     // Execute the database query and get the requested custome
     /////////////////////////////////////////////////////////////////
     customerModel.findById(req.params.customerId, function(err,data){
-        if(err) next(err); if(!data) next();
+        if(err) return next(err);
+        if(!data) return next();
         res.status(200).json(data);
     })
 
@@ -154,16 +163,14 @@ router.get("/:customerId/orders", function(req, res, next) {
     /////////////////////////////////////////////////////////////////
     // Execute the database query and get the requested custome
     /////////////////////////////////////////////////////////////////
+    var options=req.pagingOptions;
+
     var query = {customer: req.params.customerId};
-    orderModel.find(query).populate("orderitems.productId").exec(function(err,data){
-      if(err) next(err); if(!data) next();
+    orderModel.find(query).limit(options.size).skip(options.skip).populate("orderitems.productId").sort('-orderdate').exec(function(err,data){
+      if(err) return next(err); 
+      if(!data) return next();
       res.status(200).json(data);
     });
-
-    //orderModel.find(query, function(err,data){
-    //  if(err) next(err); if(!data) next();
-    //  res.status(200).json(data);
-    //});
 
 });
 
@@ -196,13 +203,20 @@ router.post("/:customerId/orders", function(req, res, next) {
     // Save the Review and Return 201 Code If Successful
     /////////////////////////////////////////////////////////////////
     newOrder.save(function(err, data){
-      if(err) next(err);
-      if(!data) next();
+      if(err) return next(err);
       res.status(201).json(data);       
    });
     
 });
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Private Helper Routines
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Description
+// Parse products Constructs a Schema Compliant Object from data passed in the body
+// of the message
+/////////////////////////////////////////////////////////////////////////////////////////////////
 function parseProducts(basket){
 
   var orderedProducts = [];
@@ -220,6 +234,13 @@ function parseProducts(basket){
 
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Private Helper Routines
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Description
+// Parse Payment Constructs a Schema Compliant Object from data passed in the body
+// of the message
+/////////////////////////////////////////////////////////////////////////////////////////////////
 function parsePayment(basket){
 
     var transaction = {};
@@ -230,6 +251,13 @@ function parsePayment(basket){
     return transaction;  
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Private Helper Routines
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Description
+// Parse Delivery Constructs a Schema Compliant Object from data passed in the body
+// of the message
+/////////////////////////////////////////////////////////////////////////////////////////////////
 function parseDelivery(basket){
 
     var delivery = {};
@@ -238,12 +266,17 @@ function parseDelivery(basket){
     return delivery;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Private Helper Routines
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Description
+// Parse address Constructs a Schema Compliant Object from data passed in the body
+// of the message
+/////////////////////////////////////////////////////////////////////////////////////////////////
 function parseAddress(customer){
 
     var address=customer.address;
     return address;
 }
-
-
 
 module.exports = router;

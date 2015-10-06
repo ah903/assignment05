@@ -8,7 +8,7 @@ angular.module("attire-app").factory("OrderFactory",["$http", function($http){
 	};
 
 	var placeOrder = function(order, callback){
-		var endPoint=serviceEndPoints.CustomerEndPoint + order.user._Id + "/orders";
+		var endPoint=serviceEndPoints.CustomerEndPoint + order.user._id + "/orders";
 		$http.post(endPoint,order)
 		.success(function(response){
 			callback(response);

@@ -1,48 +1,48 @@
 <h1>Your Account</h1>
 <div class="container">
 	<h2>Orders</h2>
-	<div ng-repeat="order in PreviousOrders | orderBy:'-orderdate'" class="row panel panel-default">
-		<div class="col-sm-12">
-			<div class="row">
-				<div class="col-sm-6">
-					<h4>Order Number : {{order._id}} </h4>
+	<div ng-repeat="order in PreviousOrders | orderBy:'-orderdate'" class="panel panel-default">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="col-sm-6">
+						<h4>Order Number : {{order._id}} </h4>
+					</div>
+					<div class="col-sm-6 text-right">
+						<h4>Total : {{order.ordertotal | currency}} </h4>
+					</div>
 				</div>
-				<div class="col-sm-6 text-right">
-					<h4>Total : {{order.ordertotal | currency}} </h4>
+				<div class="row">
+					<div class="col-sm-4">
+						<h4>Order Date : {{order.orderdate | date}} </h4>
+					</div>
+					<div class="col-sm-4">
+						<h4>Shipping Date : {{order.delivery.shippingdate | date}} </h4>
+					</div>
+					<div class="col-sm-4 text-right">
+						<h4>Status : {{order.orderstatus}} </h4>
+					</div>
+				</div>
+				<h4>Products</h4>
+				<div ng-repeat="item in order.orderitems" class="row">
+					<div class="col-sm-4">
+						{{item.productId.title}}
+					</div>
+					<div class="col-sm-2">
+						{{item.size}}
+					</div>		
+					<div class="col-sm-2">
+						{{item.color}}
+					</div>		
+					<div class="col-sm-2">
+						{{item.quantity}}
+					</div>
+					<div class="col-sm-2">
+						<button class="btn btn-default">Add Review</button>
+					</div>
+					<p>&nbsp;</p>	
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-4">
-					<h4>Order Date : {{order.orderdate | date}} </h4>
-				</div>
-				<div class="col-sm-4">
-					<h4>Shipping Date : {{order.delivery.shippingdate | date}} </h4>
-				</div>
-				<div class="col-sm-4 text-right">
-					<h4>Status : {{order.orderstatus}} </h4>
-				</div>
-			</div>
-			<h4>Products</h4>
-			<div ng-repeat="item in order.orderitems" class="row">
-				<div class="col-sm-4">
-					{{item.productId.title}}
-				</div>
-				<div class="col-sm-2">
-					{{item.size}}
-				</div>		
-				<div class="col-sm-2">
-					{{item.color}}
-				</div>		
-				<div class="col-sm-2">
-					{{item.quantity}}
-				</div>
-				<div class="col-sm-2">
-					<button class="btn btn-default">Add Review</button>
-				</div>
-				<p>&nbsp;</p>	
-			</div>
-		</div>
+		</div>	
 	</div>
-	
-
 </div>
