@@ -19,7 +19,7 @@ a fictional clothing store called Attire
 	Clone this repository to a local folder called attire
 	This can be done from GitHub using the Clone to Desktop option or from the command prompt type
 	
-	git clone https://githib.com/ah903/assignment05.git attire
+	git clone https://githib.com/ah903/assignment05 attire
 
 
 3. Installing Dependencies
